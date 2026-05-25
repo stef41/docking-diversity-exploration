@@ -149,7 +149,7 @@ to beat random search.
 @article{bugaud2026diversity,
   title   = {Diversity-Seeking Exploration Discovers Broader
              Docking-Predicted Interaction Profiles Across Protein Families},
-  author  = {Bugaud, Zacharie},
+  author  = {Bugaud, Z.},
   journal = {Journal of Chemical Information and Modeling},
   year    = {2026}
 }
