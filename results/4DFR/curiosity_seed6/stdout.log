@@ -1,0 +1,38 @@
+============================================================
+  Method: curiosity
+  Target: 4DFR
+  Seed: 6
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/curiosity_seed6
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=27s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=41s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=52s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=62s
+  [25/500] CC(=O)c1ccc(OCC(=O)NC2C(=O)N3C2SC(C)(C)C... int=5 res=4 vina=-8.4 t=339s
+  [50/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=3 res=3 vina=-6.1 t=677s
+  [75/500] CCCC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-6.0 t=1046s
+  [100/500] CCOC(=O)C1N2C(=O)C(NC(=O)COc3ccc(OC(C)=O... int=7 res=7 vina=-7.9 t=1410s
+  [125/500] CC1(C)SC2C(NC(=O)COc3ccc(CC(N)=O)cc3)C(=... int=6 res=6 vina=-8.1 t=1793s
+  [150/500] CC(=O)Oc1ccc(OC(C)=O)cc1... int=3 res=3 vina=-5.5 t=2174s
+  [175/500] CCOC(=O)C1CCCN1... int=5 res=3 vina=-4.8 t=2551s
+  [200/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=2936s
+  [225/500] CCOC(=O)C1N2C(=O)C(NC(=O)COc3ccc(N(C)C)c... int=7 res=7 vina=-8.5 t=3331s
+  [250/500] CC(C)c1ccc(O)c(O)c1... int=5 res=5 vina=-6.1 t=3737s
+  [275/500] CC(C)C(NC(=O)OC(C)(C)C)C(=O)NC1C(=O)N2C1... int=2 res=2 vina=-8.2 t=4131s
+  [300/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3cc(OC)cc(OC)... int=7 res=6 vina=-8.1 t=4531s
+  [325/500] COc1cc(CC(C)N)cc(OCCO)c1OC... int=5 res=5 vina=-5.9 t=4916s
+  [350/500] CCOC(=O)C(N)CC(C)C... int=6 res=6 vina=-5.0 t=5386s
+  [375/500] Oc1ccc(Cl)cc1Cl... int=4 res=4 vina=-4.9 t=6037s
+  [400/500] COC(=O)c1cc(Cl)cc(CC(=O)NC2C(=O)N3C2SC(C... int=5 res=5 vina=-8.6 t=6673s
+  [425/500] NC(CCC(=O)Oc1cc(F)cc(O)c1C(=O)O)C(=O)O... int=6 res=6 vina=-8.0 t=7287s
+  [450/500] OCc1ccc(-c2ccc(I)cc2)cc1... int=5 res=5 vina=-7.1 t=7917s
+  [475/500] COC(=O)c1cc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3... int=4 res=4 vina=-8.2 t=8425s
+  [500/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3cc(CCN)cc(CC... int=6 res=6 vina=-8.9 t=8930s
+
+Results → paper/experiments/results_v3/4DFR/curiosity_seed6/results.json
+Total: 8930s (17.9s/iter)

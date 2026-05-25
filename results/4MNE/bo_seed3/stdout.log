@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4MNE
+  Seed: 3
+  Iterations: 500
+  Output: paper/experiments/results_v3/4MNE/bo_seed3
+============================================================
+Target: 4MNE (BRAF, Kinase)
+Pocket residues: 68
+Behavior dim: 205
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-7.8 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.8 t=28s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=4 res=4 vina=-6.1 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=8 res=6 vina=-6.2 t=54s
+  [5/500] OC(=O)c1ccccc1O... int=8 res=6 vina=-6.2 t=67s
+  [25/500] CN(C)c1ccc(C(C)(C)O)cc1... int=4 res=4 vina=-6.9 t=353s
+  [50/500] CC(=O)Nc1ccc(Cl)cc1... int=4 res=4 vina=-6.2 t=680s
+  [75/500] CC(C)c1ccc(N(C)C)cc1... int=5 res=5 vina=-6.9 t=1015s
+  [100/500] CC(N)c1ccc(N(C)C)cc1... int=3 res=3 vina=-6.8 t=1364s
+  [125/500] COc1cc(C=O)ccc1O... int=3 res=3 vina=-5.4 t=1706s
+  [150/500] COc1ccc(NC(C)=O)cc1... int=4 res=4 vina=-6.3 t=2061s
+  [175/500] COC(=O)c1ccc(N)cc1... int=4 res=4 vina=-5.8 t=2430s
+  [200/500] COc1ccc(C(C)=O)cc1... int=5 res=5 vina=-6.2 t=2804s
+  [225/500] COc1ccc(C(C)=O)cc1... int=5 res=5 vina=-6.2 t=3157s
+  [250/500] COc1ccc(CC(C)C)cc1... int=6 res=6 vina=-6.5 t=3511s
+  [275/500] COc1cc(C(=O)O)ccc1C... int=4 res=4 vina=-5.9 t=3877s
+  [300/500] CCOC(=O)c1ccccc1N... int=9 res=7 vina=-6.1 t=4218s
+  [325/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-5.1 t=4571s
+  [350/500] CCOC(=O)c1ccccc1N... int=9 res=7 vina=-6.1 t=4940s
+  [375/500] COc1cc(C(=O)O)ccc1C... int=4 res=4 vina=-5.9 t=5302s
+  [400/500] COc1cc(C(N)=O)ccc1C... int=4 res=4 vina=-6.0 t=5682s
+  [425/500] COC(=O)c1ccc(N)cc1... int=4 res=4 vina=-5.8 t=6075s
+  [450/500] CC(C)c1ccc(O)c(O)c1... int=7 res=6 vina=-6.8 t=6477s
+  [475/500] COc1cc(C(=O)CCl)ccc1C... int=5 res=4 vina=-6.0 t=6884s
+  [500/500] COC(=O)c1ccc(C)c(OC)c1... int=5 res=4 vina=-5.7 t=7277s
+
+Results → paper/experiments/results_v3/4MNE/bo_seed3/results.json
+Total: 7277s (14.6s/iter)

@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4DFR
+  Seed: 6
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/bo_seed6
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=16s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=29s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=43s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=58s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=71s
+  [25/500] CN(C)c1ccc(CC(N)C(=O)O)cc1... int=2 res=2 vina=-6.2 t=378s
+  [50/500] CC(O)c1cccc(-c2ccc(N3CCOCC3)cc2)c1... int=5 res=4 vina=-7.9 t=735s
+  [75/500] CC(=O)Nc1ccc(Br)cc1... int=4 res=4 vina=-5.2 t=1087s
+  [100/500] CC(=O)Oc1ccc(Br)cc1... int=5 res=5 vina=-5.3 t=1433s
+  [125/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-4.8 t=1758s
+  [150/500] CC(C)(O)c1ccc(Br)cc1... int=5 res=5 vina=-6.4 t=2096s
+  [175/500] COc1ccc(Br)cc1... int=4 res=4 vina=-4.8 t=2440s
+  [200/500] CC(C)CC(N)C(=O)O... int=0 res=0 vina=-4.7 t=2783s
+  [225/500] Oc1ccc(Cl)cc1Cl... int=4 res=4 vina=-4.9 t=3120s
+  [250/500] CC(N)Cc1ccc(O)c(O)c1... int=3 res=3 vina=-6.2 t=3702s
+  [275/500] CC1(C)SC2C(NC(=O)Cc3cc(O)cc(CCN)c3)C(=O)... int=6 res=6 vina=-8.7 t=4340s
+  [300/500] COc1cc(C=NO)cc(OC(C)=O)c1OC... int=5 res=5 vina=-6.4 t=4960s
+  [325/500] COc1ccc(Br)cc1... int=4 res=4 vina=-4.8 t=5568s
+  [350/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-4.8 t=6170s
+  [375/500] CC(O)c1ccc2ccccc2c1... int=6 res=6 vina=-6.7 t=6649s
+  [400/500] Oc1ccc(Cl)cc1Cl... int=4 res=4 vina=-4.9 t=7182s
+  [425/500] COc1ccc(-c2ccc(I)cc2)cc1... int=6 res=6 vina=-6.6 t=7741s
+  [450/500] CC1=NC(c2ccc(I)cc2)C(=O)N1... int=5 res=5 vina=-6.5 t=8310s
+  [475/500] CC(=O)CCC(=O)c1ccc(F)cc1... int=6 res=5 vina=-6.2 t=8840s
+  [500/500] CC1=NC(c2ccc(I)cc2)C(=O)N1... int=5 res=5 vina=-6.5 t=9336s
+
+Results → paper/experiments/results_v3/4DFR/bo_seed6/results.json
+Total: 9336s (18.7s/iter)

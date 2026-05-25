@@ -1,0 +1,38 @@
+============================================================
+  Method: random
+  Target: 4MNE
+  Seed: 5
+  Iterations: 500
+  Output: paper/experiments/results_v3/4MNE/random_seed5
+============================================================
+Target: 4MNE (BRAF, Kinase)
+Pocket residues: 68
+Behavior dim: 205
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-7.8 t=16s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.8 t=29s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=4 res=4 vina=-6.1 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=8 res=6 vina=-6.2 t=59s
+  [5/500] OC(=O)c1ccccc1O... int=8 res=6 vina=-6.2 t=71s
+  [25/500] O=C(O)c1cc(Cl)ccc1O... int=3 res=3 vina=-6.3 t=370s
+  [50/500] CC(C)(O)c1ccc(Br)cc1... int=6 res=5 vina=-6.6 t=766s
+  [75/500] COc1ccc(Cl)cc1OC... int=2 res=2 vina=-5.3 t=1192s
+  [100/500] Oc1ccc(Cl)cc1Cl... int=2 res=2 vina=-5.8 t=1644s
+  [125/500] CC1(C)SC2C(NC(=O)Cc3ccc(F)cc3)C(=O)N2C1C... int=6 res=5 vina=-8.3 t=2082s
+  [150/500] CC(N)C(=O)O... int=0 res=0 vina=-4.0 t=2519s
+  [175/500] CC(=O)Nc1ccc(O)cc1... int=8 res=6 vina=-6.2 t=2918s
+  [200/500] Oc1ccc(Cl)cc1Cl... int=2 res=2 vina=-5.8 t=3364s
+  [225/500] NC(Cc1ccc(O)c(O)c1)C(=O)O... int=6 res=6 vina=-7.0 t=3790s
+  [250/500] CC(C)(O)c1ccc(CCC(=O)O)cc1... int=9 res=9 vina=-7.9 t=4229s
+  [275/500] CC(=O)Oc1cc(N)ccc1O... int=7 res=5 vina=-6.2 t=4646s
+  [300/500] Cc1ccc(OC(F)(F)F)cc1OCC(=O)NC1C(=O)N2C1S... int=6 res=5 vina=-8.3 t=5083s
+  [325/500] CC(=O)Oc1ccc(F)cc1C(=O)O... int=8 res=7 vina=-6.4 t=5531s
+  [350/500] CCOC(=O)c1cc(O)ccc1O... int=6 res=5 vina=-6.4 t=5935s
+  [375/500] CC(=O)c1cccc(CC(N)=O)c1... int=7 res=6 vina=-6.7 t=6326s
+  [400/500] COC(=O)c1cc(F)cc(OC)c1OC(C)=O... int=6 res=6 vina=-6.0 t=6774s
+  [425/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(F)cc3)C2... int=6 res=6 vina=-8.1 t=7266s
+  [450/500] NC(=O)Cc1ccc(O)c(O)c1... int=5 res=4 vina=-6.6 t=7757s
+  [475/500] COc1cc(C(C)O)ccc1O... int=5 res=5 vina=-6.3 t=8213s
+  [500/500] CCOC(=O)c1cc(Cl)c(Cl)cc1O... int=5 res=4 vina=-6.4 t=8692s
+
+Results → paper/experiments/results_v3/4MNE/random_seed5/results.json
+Total: 8692s (17.4s/iter)

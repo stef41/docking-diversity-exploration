@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 7
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed7
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=29s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=59s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=82s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=109s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=133s
+  [25/500] CCCCCC(=O)Oc1cc(C(=O)CCC(C)=O)cc(OC)c1C(... int=10 res=9 vina=-8.8 t=503s
+  [50/500] CC(=O)Oc1cc(Cl)c(Cl)cc1C(=O)O... int=1 res=1 vina=-7.9 t=1076s
+  [75/500] COC(=O)c1cc(Cl)c(Cl)cc1OC(C)=O... int=2 res=2 vina=-6.8 t=1472s
+  [100/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=1837s
+  [125/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2169s
+  [150/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2509s
+  [175/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2848s
+  [200/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3204s
+  [225/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3555s
+  [250/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3907s
+  [275/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=4271s
+  [300/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=4641s
+  [325/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=5019s
+  [350/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=5397s
+  [375/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=5790s
+  [400/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=6188s
+  [425/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=6606s
+  [450/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=7027s
+  [475/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=7482s
+  [500/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=8008s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed7/results.json
+Total: 8008s (16.0s/iter)

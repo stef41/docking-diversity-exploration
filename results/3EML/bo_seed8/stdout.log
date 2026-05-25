@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3EML
+  Seed: 8
+  Iterations: 500
+  Output: paper/experiments/results_v3/3EML/bo_seed8
+============================================================
+Target: 3EML (EGFR, Kinase)
+Pocket residues: 65
+Behavior dim: 196
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-8.5 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.7 t=30s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=8 vina=-6.3 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=53s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.9 t=63s
+  [25/500] CC(=O)Oc1cc(C(C)O)ccc1C(=O)O... int=7 res=7 vina=-7.1 t=369s
+  [50/500] CC(=O)c1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.3 t=747s
+  [75/500] CC(=O)N1CCN(c2ccc(C(=N)N)cc2)CC1... int=6 res=6 vina=-7.8 t=1106s
+  [100/500] CC(=O)c1ccc(N2CCOCC2)cc1... int=4 res=4 vina=-7.3 t=1464s
+  [125/500] N=C(N)c1ccc(C=Cc2ccc(Cl)c(Cl)c2)cc1... int=7 res=7 vina=-9.2 t=1828s
+  [150/500] CC(N)c1ccc(N2CCOCC2)cc1... int=2 res=2 vina=-7.4 t=2200s
+  [175/500] CC(C)(O)c1ccc(N2CCOCC2)cc1... int=4 res=4 vina=-7.9 t=2571s
+  [200/500] Clc1cccc(N2CCOCC2)c1... int=1 res=1 vina=-6.7 t=2930s
+  [225/500] COC(=O)c1ccc(N2CCOCC2)cc1... int=2 res=2 vina=-6.7 t=3298s
+  [250/500] CC(N)Cc1ccc(O)c(O)c1... int=4 res=4 vina=-6.8 t=3653s
+  [275/500] NC(CCCC(N)C(=O)O)C(=O)O... int=4 res=4 vina=-5.8 t=4045s
+  [300/500] O=C(O)CN1C(=O)c2ccccc2C1=O... int=4 res=4 vina=-7.4 t=4414s
+  [325/500] COc1cc(C=O)ccc1O... int=2 res=2 vina=-5.3 t=4798s
+  [350/500] COc1cc(C=O)ccc1O... int=2 res=2 vina=-5.3 t=5159s
+  [375/500] N=C(N)NCCCC(N)C(=O)O... int=0 res=0 vina=-5.5 t=5529s
+  [400/500] CC(O)c1ccc2ccccc2c1... int=5 res=5 vina=-8.0 t=5904s
+  [425/500] CC(C)CC(N)C(=O)O... int=0 res=0 vina=-4.9 t=6282s
+  [450/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=8 vina=-6.3 t=6708s
+  [475/500] CC(C)c1ccc(O)c(O)c1... int=5 res=5 vina=-6.9 t=7151s
+  [500/500] CC(O)c1ccc2ccccc2c1... int=5 res=5 vina=-8.0 t=7639s
+
+Results → paper/experiments/results_v3/3EML/bo_seed8/results.json
+Total: 7639s (15.3s/iter)

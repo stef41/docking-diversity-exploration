@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1ERE
+  Seed: 1
+  Iterations: 500
+  Output: paper/experiments/results_v3/1ERE/bo_seed1
+============================================================
+Target: 1ERE (Estrogen Receptor α, Nuclear receptor)
+Pocket residues: 71
+Behavior dim: 214
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-6.8 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.4 t=25s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-6.8 t=39s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=54s
+  [5/500] OC(=O)c1ccccc1O... int=5 res=5 vina=-6.2 t=63s
+  [25/500] CCCC(=O)Oc1cc(Cl)ccc1C(=O)OCC... int=6 res=6 vina=-6.9 t=353s
+  [50/500] CC(=O)c1ccc(N2CCOCC2)cc1... int=5 res=5 vina=-7.0 t=693s
+  [75/500] COc1ccc(N2CCOCC2)cc1... int=4 res=4 vina=-6.3 t=1037s
+  [100/500] Fc1ccc(-c2ccc(I)cc2)cc1... int=3 res=3 vina=-6.5 t=1394s
+  [125/500] O=C(Nc1ccc(Cl)cc1)c1ccccc1... int=6 res=6 vina=-6.6 t=1746s
+  [150/500] CC(=O)N1CCN(c2ccc(Cl)cc2)CC1... int=4 res=4 vina=-6.4 t=2130s
+  [175/500] Ic1ccc(N2CCOCC2)cc1... int=3 res=3 vina=-6.3 t=2492s
+  [200/500] Nc1cccc(C=Cc2ccc(Br)cc2)c1... int=6 res=6 vina=-5.9 t=2877s
+  [225/500] Clc1cccc(-c2nn[nH]n2)c1... int=8 res=7 vina=-6.8 t=3246s
+  [250/500] CC1=NC(c2ccccc2)C(=O)N1... int=5 res=5 vina=-6.8 t=3637s
+  [275/500] Nc1cccc(C=Cc2ccc(Br)cc2)c1... int=6 res=6 vina=-5.9 t=4034s
+  [300/500] FC(F)(F)Oc1ccc(Cl)c(Cl)c1... int=2 res=2 vina=-6.5 t=4441s
+  [325/500] CC1=NC(c2ccc(Cl)c(Cl)c2)C(=O)N1... int=3 res=3 vina=-7.5 t=4821s
+  [350/500] CC(C)(O)c1ccc(C(O)c2ccccc2)cc1... int=8 res=7 vina=-7.6 t=5251s
+  [375/500] Ic1ccc(-c2ccc(I)cc2)cc1... int=4 res=4 vina=-3.2 t=5667s
+  [400/500] CC(C(=O)O)c1ccc(I)cc1... int=7 res=7 vina=-6.5 t=6112s
+  [425/500] O=C(Cc1ccc(I)cc1)NO... int=9 res=8 vina=-6.8 t=6554s
+  [450/500] O=C(O)CCc1ccc(I)cc1... int=5 res=5 vina=-6.5 t=7011s
+  [475/500] O=C(Nc1ccccc1)c1ccc(I)cc1... int=6 res=6 vina=-4.5 t=7479s
+  [500/500] CC(C(=O)O)c1ccc(I)cc1... int=7 res=7 vina=-6.5 t=7961s
+
+Results → paper/experiments/results_v3/1ERE/bo_seed1/results.json
+Total: 7961s (15.9s/iter)

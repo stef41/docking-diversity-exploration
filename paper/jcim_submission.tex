@@ -1,0 +1,290 @@
+\documentclass[journal=jcisd8,manuscript=article]{achemso}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\setlength{\emergencystretch}{3em}
+
+\author{Zacharie Bugaud}
+\affiliation{Inria, France}
+\email{zacharie.bugaud@gmail.com}
+
+\title{Diversity-Seeking Exploration Discovers Broader Docking-Predicted Interaction Profiles Across Protein Families}
+
+\abbreviations{IMGEP, QD, MAP-Elites, PLIP, CReM, GNINA}
+
+\keywords{molecular docking, interaction diversity, behavior-space exploration, quality-diversity, intrinsically motivated goal exploration, virtual screening}
+
+\begin{document}
+
+\begin{abstract}
+Virtual screening campaigns typically optimize binding affinity, converging on narrow chemical series that explore a single binding mode per pocket. We recast molecular docking as a diversity-seeking exploration problem and systematically compare goal-directed and quality-diversity algorithms for discovering diverse residue-level interaction profiles \emph{in silico}. We introduce a residue-level multi-interaction fingerprint that encodes hydrophobic contacts and hydrogen bonds to each pocket residue, and show that this representation is critical: an atom-level fingerprint causes goal-directed exploration to degenerate (51\% fewer unique molecules than random search in an auxiliary experiment). Across seven therapeutically relevant targets from five protein families (560 runs, 280{,}000 docking evaluations), the quality-diversity method MAP-Elites discovers $13.6\%$ more unique interaction profiles than random search ($d = 1.65$, $p < 10^{-13}$), while a curiosity-driven intrinsically motivated goal exploration process (Curiosity-IMGEP) achieves the highest reachability-weighted (behavioral $\times$ chemical) diversity, with $+21\%$ unique Bemis--Murcko scaffolds and $+16\%$ unique residue contact patterns versus random. Both methods maintain binding quality comparable to random, while an affinity-focused genetic algorithm sacrifices $29\%$ of profile diversity. Independent validation with three chemical fingerprint families and Bemis--Murcko scaffolds confirms that the diversity gains extend beyond the search representation. We propose the \emph{reachability ratio}, an empirical diagnostic for behavior-space design in goal-directed molecular exploration. Code and data are publicly available.
+\end{abstract}
+
+\section{Introduction}
+
+The dominant paradigm in computational drug discovery treats molecular docking as an optimization problem: given a protein target, find the ligand that maximizes predicted binding affinity.\cite{kitchen2004docking} Virtual screening campaigns score millions of compounds against a scalar energy function and advance the top-ranked candidates.\cite{lyu2019ultra} While this has produced promising hits,\cite{gentile2020deep} it systematically ignores the breadth of possible protein--ligand interactions. A single binding pocket typically accommodates multiple binding modes with distinct residue contacts, hydrogen-bond networks, and hydrophobic packing arrangements.\cite{huggins2012binding}
+
+Discovering this interaction diversity has direct practical value. A compound predicted to engage a catalytic lysine via a hydrogen bond represents a different selectivity hypothesis than one relying on hydrophobic packing in the same sub-pocket; mutations at residues contacted by only one predicted binding mode would spare alternatives.\cite{diversity_drug_design} Diversity-oriented synthesis maximizes chemical structural variety,\cite{schreiber2000target} but chemical diversity is a poor proxy for interaction diversity: structurally similar compounds can exhibit markedly different interaction profiles, and vice versa.\cite{stumpfe2012activity}
+
+We propose to discover diverse interaction profiles algorithmically, using two families of diversity-seeking search methods from the machine learning literature. \textbf{Quality-diversity (QD) algorithms}, particularly MAP-Elites,\cite{mouret2015illuminating,pugh2016qd} maintain a behavioral archive mapping discrete cells to their best-performing solutions, providing explicit coverage pressure. \textbf{Intrinsically motivated goal exploration processes (IMGEP)},\cite{baranes2013active,forestier2017intrinsically} developed for robotic skill discovery, set self-generated goals in a behavior space, retrieve the nearest known solution, perturb it, and evaluate the result; curiosity-driven variants bias goal selection toward under-explored regions.\cite{colas2022autotelic,etcheverry2020hierarchically}
+
+Both families are designed to spread coverage across the space of possible outcomes rather than converge to optima---precisely the desideratum for interaction-profile discovery. To our knowledge, neither has been applied to molecular docking for this purpose, though the broader literatures on docking diversity and de novo design are large and we may have missed relevant work.
+
+Our contributions are:
+\begin{enumerate}
+    \item A \textbf{residue-level multi-interaction fingerprint} as a behavior-space representation for molecular docking, together with the \emph{reachability ratio}, an empirical diagnostic explaining when goal-directed exploration succeeds.
+    \item A \textbf{multi-target benchmark} spanning seven proteins from five structural families (560 runs, 280{,}000 docking evaluations).
+    \item \textbf{Evidence that diversity-seeking algorithms outperform tested baselines} on interaction-profile diversity, confirmed by independent chemical-diversity metrics.
+\end{enumerate}
+
+
+\section{Methods}
+
+\subsection{Protein target benchmark}
+
+We selected seven therapeutically relevant proteins from five structural families (Table~\ref{tab:targets}). Crystal structures were obtained from the Protein Data Bank.\cite{berman2000protein} Chain~A was extracted, water molecules and ions removed, and the binding box defined from co-crystallized ligand coordinates with 10~\AA\ padding (capped at 27~\AA). Figure~\ref{fig:docking3d} illustrates the kind of binding-mode diversity our methods seek to discover within a single pocket.
+
+\begin{table}[ht]
+\centering
+\caption{Protein target benchmark. Behavior-space dimensionality $d = N_\text{res} \times 3 + 1$.}
+\label{tab:targets}
+\begin{tabular}{llllcc}
+\toprule
+PDB & Protein & Family & Indication & Pocket & $d$ \\
+\midrule
+3V8D & CYP7A1 & Oxidoreductase & Cholesterol metab. & 95 & 286 \\
+1ERE & ER-$\alpha$ & Nuclear receptor & Breast cancer & 71 & 214 \\
+3EML & A$_{2\text{A}}$R & GPCR & Neurological & 65 & 196 \\
+1EVE & AChE & Hydrolase & Alzheimer's & 76 & 229 \\
+4DFR & DHFR & Oxidoreductase & Infection & 55 & 166 \\
+3PJC & JAK3 & Kinase & Immune disorders & 60 & 181 \\
+4MNE & BRAF & Kinase & Melanoma & 68 & 205 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\columnwidth]{../../experiments/figures_v3/fig_docking_3d.png}
+\caption{Diverse docking-predicted binding modes discovered by Curiosity-IMGEP on JAK3 (PDB 3PJC). Three structurally distinct ligands (colored sticks) dock into the same ATP-binding pocket via distinct residue contact patterns, illustrating the binding-mode diversity targeted by the methods evaluated in this study.}
+\label{fig:docking3d}
+\end{figure}
+
+\subsection{Behavior-space representation}
+\label{sec:fingerprint}
+
+We encode the interaction profile of a docked ligand as a vector $\phi(m) \in [0,1]^d$, where $d = N_\text{res} \times 3 + 1$ and $N_\text{res}$ is the number of pocket residues. For each residue $r$ and interaction type $t \in \{\text{hydrophobic, H-bond donor, H-bond acceptor}\}$:
+\begin{equation}
+    \phi_{r,t}(m) = \text{clip}\left(\frac{d_\text{max} - d_\text{nearest}(m, r, t)}{d_\text{max} - d_\text{min}}, \; 0, \; 1\right)
+\label{eq:fingerprint}
+\end{equation}
+where $d_\text{nearest}(m, r, t)$ is the distance of the closest interaction of type $t$ between molecule $m$ and residue $r$. We set $d_\text{min} = 1.5$~\AA, $d_\text{max} = 4.0$~\AA, following standard non-covalent interaction cutoffs.\cite{salentin2015plip} An additional dimension encodes normalized binding affinity: $\phi_\text{vina}(m) = \text{clip}(-\text{score}(m)/12,\; 0,\; 1)$. Interactions are extracted using PLIP.\cite{salentin2015plip}
+
+The three interaction types capture the dominant non-covalent forces in protein--ligand recognition: hydrophobic packing drives desolvation-mediated binding, while hydrogen bonds confer directionality and selectivity. Finer categories (e.g., $\pi$-stacking, halogen bonds) would increase sparsity, degrading goal-directed retrieval (see \emph{The reachability ratio: a behavior-space diagnostic}). Residue-level aggregation (vs.\ atom-level) was motivated by the reachability analysis: it increases activation density from $<1\%$ to $\sim$2--3\% of dimensions.
+
+\subsection{The reachability ratio: a behavior-space diagnostic}
+\label{sec:reachability}
+
+Whether goal-directed exploration outperforms random search depends on whether nearest-neighbor retrieval is \emph{discriminative}: different goals should select different parents. We define an empirical diagnostic:
+
+\textbf{Reachability ratio.} Let $\mathcal{B} = \{\phi(m_1), \ldots, \phi(m_n)\}$ be the set of observed behaviors. Define:
+\begin{align}
+    D_\text{goal} &= \mathbb{E}_{g \sim P_\text{goal}}\left[\min_{b \in \mathcal{B}} \|g - b\|_2\right]  \\
+    D_\text{inter} &= \mathbb{E}_{b, b' \sim \mathcal{B}}\left[\|b - b'\|_2\right]
+\end{align}
+The \textbf{reachability ratio} is $R = D_\text{goal} / D_\text{inter}$. When $R \gg 1$, distance differences between behaviors become negligible relative to goal distance, and retrieval degenerates toward random parent selection.
+
+Our residue-level fingerprint reduces $R$ from $\sim$128 (atom-level) to $\sim$8 (residue-level), primarily by increasing $D_\text{inter}$ through residue-level aggregation and multi-interaction encoding. Adaptive goal sampling (perturbing observed behaviors rather than sampling uniformly) further reduces $R$ to $\sim$0.3.
+
+\subsection{Exploration algorithms}
+
+All methods share the same molecular modification engine (CReM fragment-based mutations\cite{polishchuk2020crem}) and docking tool (GNINA with Vina scoring\cite{mcnutt2021gnina}). Each operates for $T = 500$ iterations with identical evaluation budgets, and all methods are initialized from the same shared pool of five drug-like seed molecules (benzylpenicillin, ibuprofen, aspirin, acetaminophen, salicylic acid) regardless of the target. We compare eight methods:
+
+\textbf{Random.} Random parent selection and CReM modification.
+
+\textbf{IMGEP (naive).} Goals sampled uniformly in $[0,1]^d$; nearest molecule mutated.
+
+\textbf{IMGEP (adaptive).} Goals sampled as Gaussian perturbations ($\sigma = 0.3 \times \text{observed range}$) of randomly selected observed behaviors.
+
+\textbf{Curiosity-IMGEP.} Same as adaptive, but the base behavior is selected with probability proportional to local sparsity (mean distance to 5 nearest neighbors in behavior space), biasing exploration toward under-sampled regions.
+
+\textbf{Affinity--diversity heuristic (Aff-Div).} Selects parents using $\text{score}(i) = s_i + \beta \cdot \bar{d}_\text{Tanimoto}(i, \text{top-}k)$, where $s_i$ is normalized Vina score, $\bar{d}_\text{Tanimoto}$ is mean Tanimoto distance to the $k = n/5$ best molecules, and $\beta = 2\sqrt{\ln(n+1)}$ (natural logarithm).
+
+\textbf{Genetic algorithm (GA).} Tournament selection ($k=3$) on Vina binding affinity.
+
+\textbf{MAP-Elites.}\cite{mouret2015illuminating} Behavioral archive with cells defined by binary residue contact patterns; new molecules replace existing occupants only if they have stronger (more negative) Vina scores.
+
+\textbf{Novelty search.}\cite{lehman2011novelty} Tournament selection ($k_\text{tourn} = 3$) on novelty scores (mean Euclidean distance to $k = 15$ nearest neighbors in behavior space).
+
+\textbf{Missing baselines.} The most important absent comparator is a multi-objective evolutionary baseline (e.g., NSGA-II) directly trading affinity against interaction-profile diversity. Our conclusions are comparative with respect to the tested baselines under a fixed docking budget.
+
+\subsection{Evaluation metrics}
+
+\begin{itemize}
+    \item \textbf{Unique interaction profiles}: distinct behavior vectors after 2-decimal-place rounding. Because this metric derives from the search fingerprint, we treat it as operational and rely on independent metrics (below) for stronger diversity evidence.
+    \item \textbf{Pairwise behavioral distance}: mean L2 distance between all discovered behaviors.
+    \item \textbf{Pocket residue coverage}: fraction of binding-site residues contacted by at least one ligand.
+    \item \textbf{Best Vina score}: strongest predicted binding affinity.
+    \item \textbf{Reachability-weighted diversity}: mean product of pairwise behavioral distance $\times$ pairwise chemical distance ($1 - \text{Tanimoto}$ on Morgan fingerprints,\cite{rdkit} radius 2, 2048 bits).
+    \item \textbf{Independent validation}: unique Bemis--Murcko scaffolds, unique binary residue contact patterns, and pairwise Tanimoto distances on Morgan, MACCS, and Atom Pair fingerprints.
+\end{itemize}
+
+\subsection{Experimental protocol}
+
+Each of the 8 methods ran on all 7 targets with 10 random seeds, yielding $8 \times 7 \times 10 = 560$ runs totaling 280{,}000 docking evaluations. Ligands were docked using GNINA v1.0\cite{mcnutt2021gnina} with Vina scoring (\texttt{--cnn\_scoring none}; CNN = convolutional neural network), exhaustiveness 16. 3D conformers were generated from SMILES (Simplified Molecular Input Line Entry System) using RDKit\cite{rdkit} with MMFF94 force field optimization. CReM v0.2.16\cite{polishchuk2020crem} with a fragment database of 5{,}955 entries was used for mutations. Each iteration applied one mutation, filtering candidates by Lipinski's Rule of Five and 3D embeddability.
+
+Statistical comparisons use two-sided Mann--Whitney $U$ tests with Bonferroni correction for 7 method-vs-Random comparisons per metric, Cohen's $d$ effect sizes, and bootstrap 95\% CIs. Target-level Wilcoxon signed-rank tests ($n = 7$ per-target means; one-sided when a directional alternative is stated) guard against pseudo-replication. With $n = 7$ paired observations, the smallest attainable two-sided signed-rank $p$-value is $2/2^{7} \approx 0.016$, which is reached when all per-target differences point in the same direction. Tabulated values report mean $\pm$ standard deviation; figure error bands report the standard error of the mean (SEM).
+
+
+\section{Results}
+
+\subsection{Diversity-seeking methods maximize interaction-profile variety}
+
+Table~\ref{tab:cross} and Figure~\ref{fig:convergence} present the central results pooled across all seven targets ($n = 70$ per method). Our primary operational metric---unique interaction profiles---derives from the same fingerprint used during search; we therefore treat independent scaffold, contact-pattern, and chemical-diversity analyses (see \emph{Independent validation and chemical diversity} below) as the key tests of whether gains reflect broader diversity.
+
+\textbf{MAP-Elites} discovers the most unique profiles ($350 \pm 23$, $+13.6\%$ vs.\ random; $d = 1.65$, 95\% CI $[1.30, 2.07]$, $p_\text{Bonf} < 10^{-13}$). This is consistent across all seven targets (Wilcoxon $p = 0.016$). Because MAP-Elites' archive cells are structurally related to the unique-profiles metric, its advantage on independent metrics is smaller (see \emph{Independent validation and chemical diversity} below).
+
+\textbf{Curiosity-IMGEP} ranks second on profile count ($331 \pm 29$, $+7.5\%$; $d = 0.82$, $p_\text{Bonf} < 10^{-3}$) and achieves the highest pairwise behavioral diversity ($1.147 \pm 0.081$; $d = 1.08$, $p_\text{Bonf} < 10^{-7}$), the highest pocket residue coverage ($41.8\%$), and the best reachability-weighted diversity ($0.851 \pm 0.080$, $d = 0.34$, $p = 0.043$ vs.\ MAP-Elites).
+
+\textbf{Affinity--diversity heuristic} collapses: only $105 \pm 48$ profiles ($-66\%$; $d = -5.17$). The affinity objective overwhelms the explicit Tanimoto-based diversity bonus, with consistent reductions across all targets (62--72\%).
+
+\textbf{Novelty search} performs slightly below random ($291 \pm 37$, $-5.5\%$; $d = -0.51$, $p_\text{Bonf} = 0.020$), showing that local novelty pressure does not improve coverage in this setting. This is one specific implementation; alternative formulations might perform differently.
+
+\textbf{Genetic algorithm} achieves the best binding affinities ($-11.22 \pm 1.20$ kcal/mol) but sacrifices $29\%$ of profile diversity ($d = -1.88$, $p < 10^{-5}$).
+
+Curiosity-IMGEP and MAP-Elites maintain binding quality comparable to random ($-10.40$ and $-10.36$ vs.\ $-10.10$ kcal/mol), demonstrating that diverse interaction-space coverage samples high-affinity poses as a byproduct of exploration.
+
+\begin{table*}[ht]
+\centering
+\caption{Cross-target results (mean $\pm$ std, $n = 70$: 7 targets $\times$ 10 seeds). \textbf{Bold} = best. $^\ddagger p_\text{Bonf} < 0.01$ vs.\ Random (two-sided Mann--Whitney $U$, Bonferroni-corrected). Columns: PW Dist.\ = mean pairwise Euclidean distance between behavior vectors; Unique profiles = distinct fingerprint vectors after 2-decimal-place rounding; Coverage = fraction of pocket residues contacted at least once; Best Vina = strongest predicted binding affinity (kcal/mol); Zero \% = fraction of evaluations producing no PLIP-detected interaction.}
+\label{tab:cross}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{PW Dist.} & \textbf{Unique profiles} & \textbf{Coverage (\%)} & \textbf{Best Vina (kcal/mol)} & \textbf{Zero \%} \\
+\midrule
+Random & $1.053 \pm 0.093$ & $308 \pm 29$ & $40.4 \pm 5.8$ & $-10.10 \pm 0.89$ & $4.1$ \\
+IMGEP (naive) & $\mathbf{1.248 \pm 0.083}^\ddagger$ & $231 \pm 64^\ddagger$ & $41.3 \pm 4.6$ & $-10.64 \pm 1.10^\ddagger$ & $0.5$ \\
+IMGEP (adaptive) & $1.081 \pm 0.087$ & $328 \pm 30^\ddagger$ & $40.8 \pm 5.7$ & $-10.27 \pm 0.89$ & $3.2$ \\
+Curiosity-IMGEP & $1.147 \pm 0.081^\ddagger$ & $331 \pm 29^\ddagger$ & $\mathbf{41.8 \pm 5.8}$ & $-10.40 \pm 0.99$ & $2.3$ \\
+Aff-Div & $0.845 \pm 0.195^\ddagger$ & $105 \pm 48^\ddagger$ & $34.9 \pm 6.1^\ddagger$ & $-9.63 \pm 0.78^\ddagger$ & $10.3$ \\
+Genetic Alg. & $1.191 \pm 0.100^\ddagger$ & $219 \pm 60^\ddagger$ & $41.3 \pm 6.5$ & $\mathbf{-11.22 \pm 1.20}^\ddagger$ & $\mathbf{0.1}$ \\
+MAP-Elites & $1.075 \pm 0.086$ & $\mathbf{350 \pm 23}^\ddagger$ & $41.4 \pm 6.1$ & $-10.36 \pm 0.92$ & $2.0$ \\
+Novelty Search & $1.193 \pm 0.102^\ddagger$ & $291 \pm 37$ & $41.2 \pm 5.2$ & $-10.52 \pm 0.99$ & $1.5$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\columnwidth]{../../experiments/figures_v3/fig3_convergence.pdf}
+\caption{Cumulative unique interaction profiles over 500 iterations, pooled across seven targets (mean $\pm$ SEM, $n = 70$). MAP-Elites and Curiosity-IMGEP maintain sustained discovery without plateauing. The Aff-Div heuristic (labeled ``UCB Heuristic'' in the legend) collapses after $\sim$200 iterations.}
+\label{fig:convergence}
+\end{figure}
+
+\subsection{Independent validation and chemical diversity}
+\label{sec:independent}
+
+A central concern for docking-diversity studies is evaluation circularity: the search operates in an interaction-fingerprint space, and the primary metric derives from the same fingerprint. We address this with multiple validation metrics independent of the search representation.
+
+\textbf{Bemis--Murcko scaffolds}\cite{bemis1996properties} (2D molecular skeletons, entirely independent of docking): Curiosity-IMGEP discovers $19.8 \pm 5.8$ unique scaffolds vs.\ random's $16.3 \pm 3.2$ ($+21\%$, $d = 0.75$, $p < 10^{-5}$). MAP-Elites discovers $21.4 \pm 8.1$ scaffolds vs.\ random ($d = 0.81$, same sign and comparable magnitude to Curiosity-IMGEP).
+
+\textbf{Unique residue contact patterns} (binary coarsening of the fingerprint): Curiosity discovers $272 \pm 25$ vs.\ random's $235 \pm 25$ ($+16\%$, $d = 1.48$, $p < 10^{-13}$).
+
+\textbf{Chemical diversity} (pairwise Tanimoto distance on Morgan, MACCS, and Atom Pair fingerprints): MAP-Elites maintains comparable chemical diversity to random across all three representations ($|d| < 0.2$, n.s.). GA collapses severely ($d < -3.0$, $p < 10^{-20}$ on all three). Notably, the Aff-Div heuristic achieves the \emph{highest} chemical diversity ($0.828$ Morgan Tanimoto) despite discovering the fewest interaction profiles---chemical diversity alone does not ensure interaction-profile diversity. This finding underscores that interaction-space diversity, not chemical-space diversity, should be the primary target for binding-mode enumeration.
+
+\textbf{Reachability-weighted diversity} (behavioral $\times$ chemical distance): Curiosity-IMGEP achieves the highest score ($0.851 \pm 0.080$), exceeding MAP-Elites ($0.825$, $d = 0.34$, $p = 0.043$) and GA ($0.546$, $d = 3.15$, $p < 10^{-21}$).
+
+\textbf{Exclusive profiles.} Across all seven targets, $\sim$63\% of Curiosity-IMGEP's and $\sim$63\% of MAP-Elites' unique profiles are exclusive (not found in any of 70 random runs). Within Curiosity-IMGEP, these exclusive profiles engage more non-covalent interactions per molecule than the method's non-exclusive profiles ($+0.47$ on average) and show a higher hydrogen-bond rate (exclusive: $91.8\%$ vs.\ non-exclusive: $86.7\%$), contact more pocket residues, and maintain comparable predicted binding quality ($\Delta < 0.1$ kcal/mol).
+
+\subsection{Behavior-space design controls exploration success}
+\label{sec:reachability_results}
+
+Table~\ref{tab:reachability} validates the reachability ratio diagnostic. In an auxiliary atom-level experiment, IMGEP discovered 51\% fewer unique molecules than random with a 69\% zero-interaction rate at $R \approx 128$: goal-directed retrieval degenerates because all behaviors are approximately equidistant from sampled goals. With the residue-level fingerprint ($R \approx 8$), IMGEP variants outperform random on all targets.
+
+\begin{table}[ht]
+\centering
+\caption{Reachability ratio analysis. Residue-level aggregation reduces $R$ from $\sim$128 to $\sim$8, coinciding with effective goal-directed retrieval.}
+\label{tab:reachability}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Fingerprint} & $d$ & \textbf{Sparsity} & $D_\text{goal}$ & $D_\text{inter}$ & $R$ \\
+\midrule
+Atom-level (naive) & $\sim$314 & $>99\%$ & $\sim$10.2 & $\sim$0.08 & $\sim$128 \\
+Residue-level (ours) & $\sim$200 & $\sim$97\% & $\sim$8.2 & $\sim$1.0 & $\sim$8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The key design changes that reduce $R$ are: (i)~aggregating contacts at the residue rather than atom level, increasing activation density; (ii)~including three interaction types (hydrophobic, H-bond donor, H-bond acceptor), enriching the representation; and (iii)~adaptive goal sampling that keeps goals near the observed manifold ($R \approx 0.3$). This diagnostic may be useful for other applications of goal-directed exploration in high-dimensional molecular spaces.
+
+\subsection{Per-target generalization}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.9\columnwidth]{../../experiments/figures_v3/fig2_per_target_heatmap.pdf}
+\caption{Per-target performance heatmap (normalized unique-profile counts). MAP-Elites and Curiosity-IMGEP rank first and second across nearly all targets. The Aff-Div heuristic is labeled ``UCB Heuristic'' in the axis labels.}
+\label{fig:heatmap}
+\end{figure}
+
+Results generalize across all five protein families (Figure~\ref{fig:heatmap}). At the target level, MAP-Elites significantly outperforms random on all 7 targets; Curiosity-IMGEP on 2/7 (positive on all 7; Wilcoxon $p = 0.016$). GA's diversity cost varies by target: minimal on ER-$\alpha$ ($-5\%$) but severe on DHFR ($-45\%$), JAK3 ($-40\%$), and AChE ($-33\%$).
+
+\subsection{Robustness analyses}
+
+\textbf{Docking determinism.} Across 8.8M within-(target, SMILES) pair comparisons, 100\% produced identical two-decimal-place-rounded profiles. GNINA/Vina scoring is deterministic for identical SMILES inputs.
+
+\textbf{Rounding threshold.} Re-evaluating at 1--4 decimal places produces $<$6\% variation in counts with identical method rankings and stable effect sizes ($d = 0.79$--$1.08$ for Curiosity vs.\ Random).
+
+\textbf{Vina dimension ablation.} Removing the normalized Vina score dimension changes profile counts by at most $2.3\%$ across the eight methods (largest shift on Aff-Div); the fingerprint is effectively interaction-only.
+
+\textbf{Cross-scoring validation.} Re-docking all unique molecules on JAK3 and ER-$\alpha$ using GNINA's CNN rescoring preserves method rankings (Spearman $\rho = 1.0$ on both targets). This is a within-pipeline sanity check, not a fully independent validation.
+
+
+\section{Discussion}
+
+\subsection{Practical implications for virtual screening}
+
+Our results suggest that replacing affinity-focused screening with diversity-seeking exploration can substantially broaden the set of docking-predicted interaction hypotheses generated from a fixed computational budget. For a medicinal chemist, this translates to a wider initial set of predicted binding modes to evaluate: distinct sub-pocket occupancies, different hydrogen-bond patterns, and alternative hydrophobic contacts. Two practical scenarios stand out:
+
+\textbf{Hit diversification.} Given a known binder (e.g., a co-crystallized ligand), Curiosity-IMGEP or MAP-Elites can generate structurally diverse analogs that are predicted to engage different pocket residues. The $\sim$63\% of exclusively discovered profiles represent interaction hypotheses unreachable by random chemical modification under the same budget.
+
+\textbf{Resistance profiling.} Profiles contacting different pocket residues imply differing sensitivity to point mutations. A diverse interaction portfolio provides computational starting points for identifying compounds whose predicted binding is robust to specific resistance mutations.
+
+\subsection{MAP-Elites vs.\ Curiosity-IMGEP: complementary tools}
+
+The two best-performing methods offer complementary strengths. MAP-Elites maximizes the count of distinct profiles via archive-based coverage (an operational metric partially aligned with its archive structure). Curiosity-IMGEP maximizes spread in both behavioral and chemical space without requiring a discretization step. For practitioners:
+\begin{itemize}
+    \item Use \textbf{MAP-Elites} when the goal is to enumerate as many qualitatively distinct binding modes as possible.
+    \item Use \textbf{Curiosity-IMGEP} when the goal is to maximize the combined pharmacological and chemical diversity of the hit set, e.g., for scaffold hopping or patent landscape exploration.
+\end{itemize}
+
+\subsection{The reachability ratio as a design tool}
+
+The reachability ratio $R$ provides a practical guideline for practitioners designing behavior spaces for goal-directed molecular exploration. When $R \gg 10$, goal-directed retrieval degenerates; when $R < 10$, it is discriminative. The key levers are: (i)~aggregation level (residue vs.\ atom), (ii)~number of interaction types encoded, and (iii)~goal-sampling distribution. This diagnostic rests on two contrast points in our experiments and should be understood as an empirical rule of thumb; a controlled sweep varying $R$ continuously would strengthen the evidence.
+
+\subsection{Limitations}
+
+\textbf{Docking limitations.} We use rigid-body docking (GNINA/Vina), which does not capture protein flexibility, solvation, or entropic effects. The diversity we measure is of \emph{docking-predicted} interaction profiles, not experimentally validated binding modes. Molecular dynamics refinement or binding assays on representative diverse hits would be needed to establish pharmacological relevance. All evaluations remain within a single docking pipeline.
+
+\textbf{Chemical space limitations.} CReM constrains reachable chemical space to a fixed fragment vocabulary of 5{,}955 entries. Integrating IMGEP with deep generative models\cite{hoogeboom2022equivariant,corso2023diffdock} is a promising direction.
+
+\textbf{Missing baselines.} The most important absent comparator is a multi-objective evolutionary method (e.g., NSGA-II\cite{deb2002nsga2}) directly trading affinity against interaction diversity. Our conclusions are comparative with respect to the tested baselines.
+
+\textbf{Target coverage.} Two of seven targets are kinases and two oxidoreductases; the five structural families are therefore unevenly represented (three families with one target each, two with two each), and broader fold coverage would strengthen generalizability.
+
+
+\section{Conclusion}
+
+We recast molecular docking as diversity-seeking exploration in interaction space and demonstrated that MAP-Elites and Curiosity-IMGEP discover substantially more docking-predicted interaction diversity than random, novelty-based, heuristic, and affinity-focused baselines under equal budgets. The residue-level multi-interaction fingerprint and the reachability ratio provide practical design tools for applying goal-directed exploration to molecular docking. Independent validation with three chemical fingerprint families confirms the diversity gains extend beyond the search representation. We propose this framework as a front-end for computational hit diversification, generating diverse docking-predicted interaction patterns as starting points for downstream experimental triage.
+
+\section*{Data and Software Availability}
+All experimental code, configuration files, processed interaction fingerprints, and analysis scripts used in this study are openly available at \url{https://github.com/flowersteam/adtool}. Paper artifacts (raw run outputs, processed datasets, and figure-generating notebooks) are located under \texttt{paper/experiments/} in that repository. The \texttt{adtool} framework is released as open-source software. Docking calculations were performed with GNINA (\url{https://github.com/gnina/gnina}); protein--ligand interaction profiling used PLIP (\url{https://github.com/pharmai/plip}); molecular descriptors and Bemis--Murcko scaffold analysis used RDKit (\url{https://www.rdkit.org}). The seven target structures with their PDB identifiers and preparation protocol are listed in Table~1 and described in the Methods section; ligand sets and processed interaction fingerprints are distributed with the code repository above.
+
+\bibliography{jcim}
+
+\end{document}

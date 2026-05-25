@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 9
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed9
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=14s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=29s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=53s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=65s
+  [25/500] O=Cc1ccc(O)c(C(=O)O)c1... int=4 res=4 vina=-7.3 t=379s
+  [50/500] O=C(O)c1cc(Cl)ccc1O... int=3 res=3 vina=-7.0 t=745s
+  [75/500] CC(C)(O)c1ccc(N2CCOCC2)cc1... int=4 res=4 vina=-7.9 t=1114s
+  [100/500] CC(C)c1ccc(O)c(O)c1... int=5 res=5 vina=-7.5 t=1497s
+  [125/500] NC(=S)Nc1ccc(C=NO)cc1... int=5 res=5 vina=-7.2 t=1860s
+  [150/500] CC(=O)c1ccc(C(=N)N)cc1... int=3 res=3 vina=-7.4 t=2211s
+  [175/500] CC(C)(O)c1ccc(C=NO)cc1... int=6 res=6 vina=-8.1 t=2548s
+  [200/500] CC(=O)Oc1ccc(C=NO)cc1... int=5 res=5 vina=-7.0 t=2899s
+  [225/500] CC(=O)Nc1ccc(C=NO)cc1... int=5 res=5 vina=-7.2 t=3244s
+  [250/500] CC(C)Cc1ccc(C=NO)cc1... int=5 res=5 vina=-7.9 t=3596s
+  [275/500] COc1ccc(C=NO)cc1... int=4 res=4 vina=-6.4 t=3944s
+  [300/500] CC(C(=O)O)c1ccc(C=NO)cc1... int=6 res=6 vina=-7.9 t=4299s
+  [325/500] CC(=O)CCC(=O)c1ccc(N(C)C)cc1... int=5 res=5 vina=-7.9 t=4679s
+  [350/500] CN(C)c1ccc(C=NO)cc1... int=4 res=4 vina=-6.8 t=5051s
+  [375/500] CC(N)c1ccc(C=NO)cc1... int=6 res=6 vina=-7.5 t=5429s
+  [400/500] CC(C)c1ccc(O)c(O)c1... int=5 res=5 vina=-7.5 t=5827s
+  [425/500] CC(N)Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.3 t=6230s
+  [450/500] CC(N)Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.3 t=6668s
+  [475/500] CC(=O)CCC(=O)c1ccc(N(C)C)cc1... int=5 res=5 vina=-7.9 t=7160s
+  [500/500] CN(C)c1ccc(N=Nc2ccc([N+](=O)[O-])cc2)cc1... int=5 res=5 vina=-8.3 t=7689s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed9/results.json
+Total: 7689s (15.4s/iter)

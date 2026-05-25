@@ -1,0 +1,38 @@
+============================================================
+  Method: ga
+  Target: 4DFR
+  Seed: 2
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/ga_seed2
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=17s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=36s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=50s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=68s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=81s
+  [25/500] CC(=O)Oc1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C... int=7 res=7 vina=-8.4 t=481s
+  [50/500] CC(=O)Oc1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C... int=7 res=7 vina=-8.4 t=987s
+  [75/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(CC(N)C(=... int=7 res=7 vina=-9.0 t=1472s
+  [100/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(N)=O)cc3)C(=O)... int=7 res=6 vina=-8.4 t=1842s
+  [125/500] CC(C(=O)O)c1ccc(OCC(=O)NC2C(=O)N3C2SC(C)... int=7 res=6 vina=-8.5 t=2267s
+  [150/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(CC(C)C)c... int=7 res=7 vina=-8.3 t=2762s
+  [175/500] CC(N)c1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3C... int=5 res=5 vina=-8.5 t=3299s
+  [200/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(C=CC(=O)... int=4 res=4 vina=-8.6 t=3791s
+  [225/500] CC1(C)SC2C(NC(=O)Cc3ccc(CCC(=O)O)cc3)C(=... int=5 res=5 vina=-9.4 t=4294s
+  [250/500] CC1(C)SC2C(NC(=O)Cc3ccc(N4CCOCC4)cc3)C(=... int=5 res=5 vina=-9.1 t=4787s
+  [275/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(=O)NCCN4CCOCC4... int=5 res=5 vina=-9.6 t=5273s
+  [300/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(C4N=C(C)... int=7 res=6 vina=-8.7 t=5748s
+  [325/500] COC(=O)c1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C... int=7 res=7 vina=-9.1 t=6209s
+  [350/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(C(=N)N)c... int=4 res=4 vina=-8.6 t=6684s
+  [375/500] CC1(C)SC2C(NC(=O)Cc3ccc(C=CC(=O)O)cc3)C(... int=8 res=7 vina=-9.1 t=7126s
+  [400/500] CC(N)c1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3C... int=5 res=5 vina=-8.5 t=7629s
+  [425/500] CC(C)Cc1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3... int=5 res=5 vina=-8.3 t=8087s
+  [450/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(Br)cc3)C... int=4 res=4 vina=-8.0 t=8563s
+  [475/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(C(C)C(=O... int=5 res=5 vina=-8.5 t=9042s
+  [500/500] CC1(C)SC2C(NC(=O)Cc3ccc(CCC(=O)O)cc3)C(=... int=5 res=5 vina=-9.4 t=9559s
+
+Results → paper/experiments/results_v3/4DFR/ga_seed2/results.json
+Total: 9559s (19.1s/iter)

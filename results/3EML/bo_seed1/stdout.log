@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3EML
+  Seed: 1
+  Iterations: 500
+  Output: paper/experiments/results_v3/3EML/bo_seed1
+============================================================
+Target: 3EML (EGFR, Kinase)
+Pocket residues: 65
+Behavior dim: 196
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-8.5 t=13s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.7 t=26s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=8 vina=-6.3 t=38s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=49s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.9 t=64s
+  [25/500] NC(Cc1ccc(-c2ccc(I)cc2)cc1)C(=O)O... int=7 res=6 vina=-9.1 t=359s
+  [50/500] CC(=O)Oc1ccc(C2N=C(C)NC2=O)cc1... int=6 res=6 vina=-7.5 t=708s
+  [75/500] CC(=O)c1ccc(C2N=C(C)NC2=O)cc1... int=6 res=6 vina=-8.1 t=1069s
+  [100/500] CN(C)c1ccc(N2CCOCC2)cc1... int=1 res=1 vina=-6.8 t=1423s
+  [125/500] CC(=O)CCC(=O)c1ccc(N2CCOCC2)cc1... int=6 res=6 vina=-7.6 t=1802s
+  [150/500] CC1=NC(c2ccc(C(C)N)cc2)C(=O)N1... int=4 res=4 vina=-7.7 t=2168s
+  [175/500] CC(C)Cc1ccc(OCC(O)CNC(C)C)cc1... int=8 res=8 vina=-7.3 t=2564s
+  [200/500] CC(C)NCC(O)COc1ccc(C(C)(C)O)cc1... int=9 res=6 vina=-7.2 t=2966s
+  [225/500] CC(C)NCC(O)COc1ccc(C(=N)N)cc1... int=7 res=7 vina=-7.2 t=3362s
+  [250/500] CC(=O)Oc1ccc(OCC(O)CNC(C)C)cc1... int=9 res=9 vina=-6.8 t=3773s
+  [275/500] CC(C)NCC(O)COc1ccc(C(C)C(=O)O)cc1... int=8 res=7 vina=-7.5 t=4206s
+  [300/500] CC(C)NCC(O)COc1ccc(I)cc1... int=6 res=6 vina=-6.7 t=4625s
+  [325/500] CC(C)NCC(O)COc1ccc(C(=N)N)cc1... int=7 res=7 vina=-7.2 t=5064s
+  [350/500] CC(C)NCC(O)COc1ccc(C(=N)N)cc1... int=7 res=7 vina=-7.2 t=5527s
+  [375/500] CC(C)NCC(O)COc1ccc(C(C)(C)O)cc1... int=9 res=6 vina=-7.2 t=5999s
+  [400/500] CC(C)NCC(O)COc1ccc(C(C)(C)O)cc1... int=9 res=6 vina=-7.2 t=6483s
+  [425/500] CC(C)NCC(O)COc1ccc(C(=N)N)cc1... int=7 res=7 vina=-7.2 t=6979s
+  [450/500] CC(C)NCC(O)COc1ccc(I)cc1... int=6 res=6 vina=-6.7 t=7488s
+  [475/500] CC(C)NCC(O)COc1ccc(C(C)N)cc1... int=8 res=8 vina=-7.1 t=8020s
+  [500/500] CC(=O)Nc1ccc(OCC(O)CNC(C)C)cc1... int=5 res=5 vina=-6.9 t=8596s
+
+Results → paper/experiments/results_v3/3EML/bo_seed1/results.json
+Total: 8596s (17.2s/iter)

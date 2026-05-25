@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 4
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed4
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=32s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=58s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=86s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=114s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=140s
+  [25/500] CCOC(=O)c1cc(OC(C)=O)c(OC)cc1OC(=O)CCCN... int=8 res=7 vina=-8.3 t=702s
+  [50/500] N=C(N)NCCCC(N)C(=O)O... int=0 res=0 vina=-6.1 t=1208s
+  [75/500] N=C(N)NCCCC(N)C(=O)O... int=0 res=0 vina=-6.1 t=1571s
+  [100/500] NC(Cc1ccccc1)C(=O)O... int=0 res=0 vina=-7.3 t=1926s
+  [125/500] CC(N)Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.3 t=2294s
+  [150/500] Oc1ccc(Cl)cc1Cl... int=3 res=3 vina=-6.0 t=2634s
+  [175/500] Clc1ccc(Cl)c(Cl)c1... int=2 res=2 vina=-6.2 t=2971s
+  [200/500] O=C(O)c1cc(Cl)cc(Cl)c1... int=1 res=1 vina=-6.9 t=3320s
+  [225/500] Clc1ccccc1... int=3 res=3 vina=-5.5 t=3670s
+  [250/500] Oc1cc(F)cc(Br)c1... int=4 res=3 vina=-6.0 t=4040s
+  [275/500] O=C(O)c1cc(Cl)cc(Cl)c1... int=1 res=1 vina=-6.9 t=4390s
+  [300/500] Fc1ccc(Cl)c(Cl)c1... int=3 res=3 vina=-6.2 t=4749s
+  [325/500] O=C(CCl)c1ccccc1... int=2 res=2 vina=-6.5 t=5157s
+  [350/500] Clc1ccc(Cl)c(Cl)c1... int=2 res=2 vina=-6.2 t=5544s
+  [375/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-5.2 t=5931s
+  [400/500] NC(CCC(=O)O)C(=O)O... int=0 res=0 vina=-5.4 t=6328s
+  [425/500] NC(=O)CC(N)C(=O)O... int=0 res=0 vina=-5.2 t=6727s
+  [450/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-5.7 t=7147s
+  [475/500] O=C(O)CCc1cc(F)cc(Br)c1... int=3 res=3 vina=-7.5 t=7580s
+  [500/500] NC(Cc1ccccc1)C(=O)O... int=0 res=0 vina=-7.3 t=8018s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed4/results.json
+Total: 8018s (16.0s/iter)

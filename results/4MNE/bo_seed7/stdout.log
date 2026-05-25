@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4MNE
+  Seed: 7
+  Iterations: 500
+  Output: paper/experiments/results_v3/4MNE/bo_seed7
+============================================================
+Target: 4MNE (BRAF, Kinase)
+Pocket residues: 68
+Behavior dim: 205
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-7.8 t=14s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.8 t=27s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=4 res=4 vina=-6.1 t=41s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=8 res=6 vina=-6.2 t=55s
+  [5/500] OC(=O)c1ccccc1O... int=8 res=6 vina=-6.2 t=69s
+  [25/500] CCOC(=O)c1ccc(Cl)cc1O... int=5 res=5 vina=-6.5 t=354s
+  [50/500] COc1ccc2cc(Cl)c(O)nc2c1... int=5 res=4 vina=-7.1 t=680s
+  [75/500] NC(CCC(=O)O)C(=O)O... int=0 res=0 vina=-5.3 t=1006s
+  [100/500] OCC1OC(CO)C(O)C(O)C1O... int=4 res=4 vina=-5.9 t=1370s
+  [125/500] OCC1OC(O)C(O)C(O)C1O... int=5 res=5 vina=-5.7 t=1791s
+  [150/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=2199s
+  [175/500] OCC1OC(O)C(O)C(O)C1O... int=5 res=5 vina=-5.7 t=2612s
+  [200/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=3012s
+  [225/500] OCC1OC(O)C(O)C(O)C1O... int=5 res=5 vina=-5.7 t=3422s
+  [250/500] OCC1OC(O)C(O)C(O)C1O... int=5 res=5 vina=-5.7 t=3843s
+  [275/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=4250s
+  [300/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=4678s
+  [325/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=4 res=3 vina=-5.8 t=5105s
+  [350/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=5527s
+  [375/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=5957s
+  [400/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=4 res=3 vina=-5.8 t=6354s
+  [425/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=4 res=3 vina=-5.8 t=6730s
+  [450/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=4 res=3 vina=-5.8 t=7101s
+  [475/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=8 res=7 vina=-6.9 t=7498s
+  [500/500] O=C(O)CC(O)(CC(=O)O)C(=O)O... int=4 res=3 vina=-5.8 t=7883s
+
+Results → paper/experiments/results_v3/4MNE/bo_seed7/results.json
+Total: 7883s (15.8s/iter)

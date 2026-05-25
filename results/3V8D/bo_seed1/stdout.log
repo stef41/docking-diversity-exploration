@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3V8D
+  Seed: 1
+  Iterations: 500
+  Output: paper/experiments/results_v3/3V8D/bo_seed1
+============================================================
+Target: 3V8D (Thrombin, Serine protease)
+Pocket residues: 95
+Behavior dim: 286
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=10 res=9 vina=-9.1 t=12s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=26s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=6 vina=-6.8 t=40s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=54s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.0 t=65s
+  [25/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=338s
+  [50/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=652s
+  [75/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=971s
+  [100/500] COc1cc(CCN)cc(OC)c1OC... int=2 res=2 vina=-5.2 t=1312s
+  [125/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=1673s
+  [150/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=2044s
+  [175/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=2408s
+  [200/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=2764s
+  [225/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=3127s
+  [250/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=3478s
+  [275/500] COc1cc(C(=O)O)cc(OC)c1OC... int=2 res=2 vina=-5.7 t=3865s
+  [300/500] COc1cc(Cl)cc(OC(C)=O)c1OC... int=4 res=4 vina=-5.3 t=4247s
+  [325/500] COc1cc(Cl)cc(OC(C)=O)c1OC... int=4 res=4 vina=-5.3 t=4618s
+  [350/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=4987s
+  [375/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=5367s
+  [400/500] COc1cc(CCN)cc(OC)c1OC... int=2 res=2 vina=-5.2 t=5752s
+  [425/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=6139s
+  [450/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=6531s
+  [475/500] COc1cc(CCN)cc(OC)c1OC... int=2 res=2 vina=-5.2 t=6946s
+  [500/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=7382s
+
+Results → paper/experiments/results_v3/3V8D/bo_seed1/results.json
+Total: 7382s (14.8s/iter)

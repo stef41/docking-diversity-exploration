@@ -1,0 +1,38 @@
+============================================================
+  Method: curiosity
+  Target: 3V8D
+  Seed: 4
+  Iterations: 500
+  Output: paper/experiments/results_v3/3V8D/curiosity_seed4
+============================================================
+Target: 3V8D (Thrombin, Serine protease)
+Pocket residues: 95
+Behavior dim: 286
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=10 res=9 vina=-9.1 t=13s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=27s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=6 vina=-6.8 t=38s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=50s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.0 t=62s
+  [25/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccccc3)C2SC1... int=10 res=9 vina=-8.1 t=328s
+  [50/500] CC1(C)SC2C(NC(=O)Cc3cccc(O)c3)C(=O)N2C1C... int=7 res=7 vina=-8.8 t=673s
+  [75/500] CC1(C)SC2C(NC(=O)Cc3cccc(OC(F)(F)F)c3)C(... int=10 res=9 vina=-10.1 t=1017s
+  [100/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(N)=O)cc3)C(=O)... int=9 res=8 vina=-8.7 t=1359s
+  [125/500] COc1cc(C=CC(=O)O)ccc1C(=O)O... int=4 res=4 vina=-6.9 t=1735s
+  [150/500] CC(C)Cc1ccc(C=CC(=O)O)cc1... int=5 res=5 vina=-6.8 t=2124s
+  [175/500] CC(=O)Oc1cc(Cl)c(Cl)cc1C(=O)O... int=3 res=2 vina=-6.5 t=2488s
+  [200/500] NC(Cc1c[nH]c2ccccc12)C(=O)O... int=0 res=0 vina=-7.4 t=2908s
+  [225/500] COC(=O)c1cc(C=CC(=O)O)ccc1O... int=6 res=6 vina=-7.2 t=3305s
+  [250/500] CC(O)c1cccc(-c2ccc(OCC(=O)NC3C(=O)N4C3SC... int=8 res=8 vina=-10.6 t=3737s
+  [275/500] CC1(C)SC2C(NC(=O)Cc3ccc(N)cc3)C(=O)N2C1C... int=7 res=6 vina=-8.8 t=4132s
+  [300/500] CCOC(=O)C1CCCN1C(=O)C(C)CS... int=9 res=9 vina=-5.6 t=4522s
+  [325/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=4923s
+  [350/500] CCN(CC)C(=O)c1cc(O)cc(CC(=O)NC2C(=O)N3C2... int=10 res=8 vina=-9.3 t=5323s
+  [375/500] CC1(C)SC2C(NC(=O)Cc3ccc(CC(N)=O)cc3)C(=O... int=7 res=7 vina=-8.9 t=5727s
+  [400/500] NC(=O)Cc1ccc(C(N)=O)cc1... int=5 res=5 vina=-6.1 t=6131s
+  [425/500] CNCCCc1ccc(OCC(=O)NC2C(=O)N3C2SC(C)(C)C3... int=9 res=8 vina=-8.9 t=6550s
+  [450/500] CC(=O)c1cc(O)cc(CC(=O)NC2C(=O)N3C2SC(C)(... int=9 res=8 vina=-9.3 t=6942s
+  [475/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3cc(C(=O)O)cc... int=10 res=10 vina=-8.7 t=7394s
+  [500/500] COC(=O)c1cc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3... int=10 res=8 vina=-9.4 t=7838s
+
+Results → paper/experiments/results_v3/3V8D/curiosity_seed4/results.json
+Total: 7838s (15.7s/iter)

@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Multi-target drug discovery benchmark. Mean ± std across 7 targets × 10 seeds. \textbf{Bold} = best per metric.}
+\label{tab:main}
+\begin{tabular}{lcccccc}
+\toprule
+Method & PW Dist. & Profiles & Coverage (\%) & Best Vina & Zero\% & Interactions \\
+\midrule
+Random & 1.053±0.093 & 307.6±28.5 & 40.4±5.8 & -10.10±0.89 & 4.1±2.7 & 5.8±0.8 \\
+IMGEP (naive) & \textbf{1.248±0.083} & 230.8±64.4 & 41.3±4.6 & -10.64±1.10 & 0.5±0.7 & \textbf{8.2±1.1} \\
+IMGEP (adaptive) & 1.081±0.087 & 328.3±29.7 & 40.8±5.7 & -10.27±0.89 & 3.2±2.0 & 6.0±0.8 \\
+Curiosity-IMGEP & 1.147±0.081 & 331.5±29.2 & \textbf{41.8±5.8} & -10.40±0.99 & 2.3±1.5 & 6.4±0.7 \\
+UCB Heuristic & 0.845±0.195 & 104.6±47.2 & 34.9±6.1 & -9.63±0.78 & 10.3±14.6 & 4.4±1.4 \\
+Genetic Alg. & 1.191±0.100 & 218.9±59.6 & 41.3±6.5 & \textbf{-11.22±1.20} & \textbf{0.1±0.3} & 7.8±1.0 \\
+MAP-Elites & 1.075±0.086 & \textbf{350.3±22.7} & 41.4±6.1 & -10.36±0.92 & 2.0±1.0 & 6.1±0.7 \\
+Novelty Search & 1.193±0.102 & 290.7±36.6 & 41.2±5.2 & -10.52±0.99 & 1.5±1.4 & 7.0±0.9 \\
+\bottomrule
+\end{tabular}
+\end{table*}

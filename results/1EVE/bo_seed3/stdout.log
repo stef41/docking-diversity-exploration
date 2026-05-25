@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 3
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed3
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=24s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=51s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=75s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=104s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=131s
+  [25/500] COC(=O)c1c(O)cc(C(C)(C)O)cc1OC(=O)CCCO... int=4 res=4 vina=-9.0 t=660s
+  [50/500] CC(N)Cc1c[nH]c2ccc(C(C)(C)O)cc12... int=4 res=4 vina=-9.1 t=1267s
+  [75/500] CC(N)c1ccc2[nH]cc(CC(N)C(=O)O)c2c1... int=7 res=7 vina=-8.9 t=1629s
+  [100/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=2011s
+  [125/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=2421s
+  [150/500] CC(CC(=O)NO)C(=O)N1CCCC1C(=O)OCCO... int=13 res=11 vina=-8.5 t=2838s
+  [175/500] CCOC(=O)C1CCCN1C(=O)C(C)CC(N)=O... int=7 res=7 vina=-7.6 t=3245s
+  [200/500] CCOC(=O)C1CCCN1C(=O)C(C)CC(=O)NO... int=7 res=6 vina=-8.4 t=3664s
+  [225/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=4086s
+  [250/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=4536s
+  [275/500] CC(CC(N)=O)C(=O)N1CCCC1C(=O)OCCO... int=9 res=8 vina=-8.3 t=4986s
+  [300/500] CCOC(=O)C1CCCN1C(=O)C(C)CC(=O)NO... int=7 res=6 vina=-8.4 t=5446s
+  [325/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=5910s
+  [350/500] Oc1cc(Cl)cc(OC(F)(F)F)c1... int=0 res=0 vina=-7.1 t=6328s
+  [375/500] CCOC(=O)C1CCCN1C(=O)C(C)CC(=O)NO... int=7 res=6 vina=-8.4 t=6771s
+  [400/500] CC(CC(=O)O)C(=O)N1CCCC1C(=O)OCCO... int=7 res=7 vina=-8.1 t=7256s
+  [425/500] CCOC(=O)C1CCCN1C(=O)C(C)CC(N)=O... int=7 res=7 vina=-7.6 t=7731s
+  [450/500] CC(N)Cc1cc(CCN)cc(CCN)c1... int=7 res=6 vina=-8.1 t=8222s
+  [475/500] CC(=O)Oc1cc(CCN)cc(CCN)c1... int=4 res=4 vina=-7.8 t=8764s
+  [500/500] NCCc1cc(CCN)cc(C(=O)O)c1... int=5 res=5 vina=-8.0 t=9344s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed3/results.json
+Total: 9344s (18.7s/iter)

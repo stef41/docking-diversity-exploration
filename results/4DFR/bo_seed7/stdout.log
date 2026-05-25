@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4DFR
+  Seed: 7
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/bo_seed7
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=28s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=44s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=55s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=65s
+  [25/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=354s
+  [50/500] COC(=O)c1cc(Cl)c(Cl)cc1O... int=4 res=3 vina=-5.8 t=700s
+  [75/500] CCOc1ccc2nc(O)c(Cl)cc2c1... int=4 res=4 vina=-6.5 t=1054s
+  [100/500] CC(C)c1ccc(O)c(C(N)=O)c1... int=6 res=6 vina=-6.7 t=1398s
+  [125/500] Nc1cc(Cl)cc(OC(F)(F)F)c1... int=2 res=2 vina=-6.3 t=1746s
+  [150/500] CC(O)c1ccc2nc(O)c(Cl)cc2c1... int=3 res=3 vina=-6.9 t=2101s
+  [175/500] NCCc1cc(N)cc(CO)c1... int=7 res=7 vina=-5.7 t=2466s
+  [200/500] NCCc1cc(Cl)cc(CCCC(=O)O)c1... int=5 res=5 vina=-6.2 t=2824s
+  [225/500] COc1ccc2nc(O)c(Cl)cc2c1... int=2 res=2 vina=-6.3 t=3346s
+  [250/500] CC(C)Cc1cc(N)cc(CCN)c1... int=4 res=3 vina=-6.3 t=3997s
+  [275/500] NC(Cc1ccccc1)C(=O)O... int=0 res=0 vina=-6.3 t=4616s
+  [300/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-4.8 t=5189s
+  [325/500] CC(=O)NCCO... int=2 res=2 vina=-3.9 t=5765s
+  [350/500] CC(C)CC(N)C(=O)O... int=0 res=0 vina=-4.7 t=6277s
+  [375/500] CSCC(N)C(=O)O... int=3 res=3 vina=-4.2 t=6762s
+  [400/500] ON=Cc1ccccc1... int=2 res=2 vina=-5.4 t=7273s
+  [425/500] CC(=O)NCC(=O)O... int=2 res=2 vina=-4.6 t=7786s
+  [450/500] ON=Cc1ccccc1... int=2 res=2 vina=-5.4 t=8332s
+  [475/500] CC(CC(=O)O)C(=O)O... int=4 res=4 vina=-4.9 t=8766s
+  [500/500] CC(C)(O)c1ccccc1... int=7 res=6 vina=-6.0 t=9182s
+
+Results → paper/experiments/results_v3/4DFR/bo_seed7/results.json
+Total: 9182s (18.4s/iter)

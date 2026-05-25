@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3V8D
+  Seed: 9
+  Iterations: 500
+  Output: paper/experiments/results_v3/3V8D/bo_seed9
+============================================================
+Target: 3V8D (Thrombin, Serine protease)
+Pocket residues: 95
+Behavior dim: 286
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=10 res=9 vina=-9.1 t=14s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=28s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=6 vina=-6.8 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=57s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.0 t=73s
+  [25/500] COc1ccc2nc(O)c(Cl)cc2c1... int=4 res=4 vina=-6.7 t=362s
+  [50/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=696s
+  [75/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=1004s
+  [100/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=1307s
+  [125/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=1606s
+  [150/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=1921s
+  [175/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=2220s
+  [200/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=2526s
+  [225/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=2842s
+  [250/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=3163s
+  [275/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=3495s
+  [300/500] CCNCCc1cc(OC)c(OC)c(OC)c1... int=2 res=2 vina=-5.2 t=3862s
+  [325/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=4235s
+  [350/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=4632s
+  [375/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=4997s
+  [400/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=5386s
+  [425/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=1 res=1 vina=-6.0 t=5784s
+  [450/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-4.9 t=6193s
+  [475/500] CC(N)c1ccc(F)cc1... int=6 res=6 vina=-5.9 t=6649s
+  [500/500] N=C(N)NCC(=O)O... int=3 res=3 vina=-4.8 t=7153s
+
+Results → paper/experiments/results_v3/3V8D/bo_seed9/results.json
+Total: 7153s (14.3s/iter)

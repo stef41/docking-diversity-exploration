@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3V8D
+  Seed: 6
+  Iterations: 500
+  Output: paper/experiments/results_v3/3V8D/bo_seed6
+============================================================
+Target: 3V8D (Thrombin, Serine protease)
+Pocket residues: 95
+Behavior dim: 286
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=10 res=9 vina=-9.1 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=28s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=6 vina=-6.8 t=40s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=54s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.0 t=68s
+  [25/500] CCOC(=O)c1cc(OC(C)=O)c(OC)cc1OC(=O)CCCO... int=9 res=9 vina=-6.4 t=393s
+  [50/500] CCOC(=O)c1ccccc1N... int=5 res=5 vina=-6.0 t=773s
+  [75/500] Oc1ccc(Cl)cc1Cl... int=2 res=2 vina=-5.4 t=1095s
+  [100/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-4.9 t=1419s
+  [125/500] Clc1ccc(Cl)c(Cl)c1... int=3 res=3 vina=-5.0 t=1739s
+  [150/500] O=C(O)c1cc(Cl)cc(Cl)c1... int=1 res=1 vina=-5.9 t=2057s
+  [175/500] O=C(O)c1cccc(Cl)c1... int=4 res=4 vina=-5.7 t=2374s
+  [200/500] CC(N)c1ccc(F)cc1... int=6 res=6 vina=-5.9 t=2707s
+  [225/500] Oc1ccc(F)cc1Cl... int=7 res=7 vina=-5.4 t=3043s
+  [250/500] CC(O)c1ccc(Cl)c(Cl)c1... int=2 res=2 vina=-5.9 t=3385s
+  [275/500] O=C(O)C(F)(F)F... int=1 res=1 vina=-4.3 t=3714s
+  [300/500] NC(=O)c1ccncc1... int=4 res=4 vina=-5.1 t=4041s
+  [325/500] O=CNc1ccncc1... int=4 res=4 vina=-4.8 t=4380s
+  [350/500] CC(=O)c1ccncc1... int=3 res=3 vina=-4.7 t=4718s
+  [375/500] Nc1ccncc1... int=1 res=1 vina=-4.2 t=5058s
+  [400/500] Clc1ccncc1... int=3 res=3 vina=-4.0 t=5415s
+  [425/500] CC(N)c1ccncc1... int=5 res=5 vina=-5.1 t=5766s
+  [450/500] NC(=O)c1ccncc1... int=4 res=4 vina=-5.1 t=6159s
+  [475/500] CSCC(N)C(=O)O... int=2 res=2 vina=-4.3 t=6552s
+  [500/500] CC(CC(=O)O)C(=O)O... int=3 res=3 vina=-4.9 t=6949s
+
+Results → paper/experiments/results_v3/3V8D/bo_seed6/results.json
+Total: 6949s (13.9s/iter)

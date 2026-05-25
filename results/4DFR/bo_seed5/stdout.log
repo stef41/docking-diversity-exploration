@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4DFR
+  Seed: 5
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/bo_seed5
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=27s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=39s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=53s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=64s
+  [25/500] N=C(N)c1ccc(N2CCOCC2)cc1... int=3 res=3 vina=-6.5 t=350s
+  [50/500] N=C(N)c1ccc(C(=N)N)cc1... int=5 res=5 vina=-6.1 t=695s
+  [75/500] CC(=O)Oc1ccc(C(C)N)cc1... int=7 res=7 vina=-5.8 t=1051s
+  [100/500] O=C(O)c1ccc(N2CCOCC2)cc1... int=3 res=3 vina=-6.5 t=1398s
+  [125/500] c1ccc(CCN2CCNCC2)cc1... int=3 res=3 vina=-6.5 t=1750s
+  [150/500] c1ccc(CCN2CCNCC2)cc1... int=3 res=3 vina=-6.5 t=2094s
+  [175/500] Clc1cccc(N2CCNCC2)c1... int=2 res=2 vina=-6.1 t=2448s
+  [200/500] Clc1cccc(N2CCNCC2)c1... int=2 res=2 vina=-6.1 t=2792s
+  [225/500] CC(O)c1cccc(-c2ccc(I)cc2)c1... int=5 res=5 vina=-7.5 t=3127s
+  [250/500] Fc1ccc(N2CCNCC2)cc1... int=2 res=2 vina=-6.4 t=3684s
+  [275/500] Fc1ccc(N2CCNCC2)cc1... int=2 res=2 vina=-6.4 t=4302s
+  [300/500] CC(C)NCC(O)COc1ccc(F)cc1... int=6 res=5 vina=-6.3 t=4910s
+  [325/500] O=C(O)CCc1ccc(F)cc1... int=5 res=5 vina=-6.5 t=5526s
+  [350/500] CC1=NC(c2ccc(I)cc2)C(=O)N1... int=5 res=5 vina=-6.5 t=6136s
+  [375/500] NCCNC(=O)c1ccccc1... int=7 res=7 vina=-6.1 t=6646s
+  [400/500] CCOC(=O)c1ccccc1N... int=7 res=6 vina=-5.9 t=7190s
+  [425/500] CCCNCCNC(C)=O... int=6 res=4 vina=-4.8 t=7741s
+  [450/500] CNCCNCCNC(C)=O... int=5 res=4 vina=-4.6 t=8356s
+  [475/500] CCCCNCCNCCNC... int=5 res=4 vina=-4.5 t=8890s
+  [500/500] CCCCNCCNCCNC... int=5 res=4 vina=-4.5 t=9345s
+
+Results → paper/experiments/results_v3/4DFR/bo_seed5/results.json
+Total: 9345s (18.7s/iter)

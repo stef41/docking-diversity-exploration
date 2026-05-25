@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4DFR
+  Seed: 8
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/bo_seed8
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=16s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=30s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=43s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=56s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=68s
+  [25/500] CCOC(=O)c1cc(C(C)O)ccc1O... int=6 res=6 vina=-6.5 t=361s
+  [50/500] CC(C)(O)c1ccc(I)cc1... int=4 res=4 vina=-6.3 t=716s
+  [75/500] N=C(N)NCCCC(N)C(=O)O... int=0 res=0 vina=-5.5 t=1051s
+  [100/500] CC(=O)NCCN1CCOCC1... int=3 res=2 vina=-5.4 t=1404s
+  [125/500] CC(=O)NCCN1CCOCC1... int=3 res=2 vina=-5.4 t=1760s
+  [150/500] CNCCCNCCN1CCOCC1... int=4 res=4 vina=-5.2 t=2120s
+  [175/500] NCCCNCCCC(N)C(=O)O... int=6 res=5 vina=-5.5 t=2467s
+  [200/500] CC(=O)NCCN1CCOCC1... int=3 res=2 vina=-5.4 t=2815s
+  [225/500] NCCCNC(=O)c1ccc(F)cc1... int=5 res=4 vina=-6.1 t=3367s
+  [250/500] c1ccc(N2CCOCC2)cc1... int=3 res=3 vina=-5.3 t=4021s
+  [275/500] CCNCCCNCCN1CCOCC1... int=5 res=5 vina=-5.3 t=4637s
+  [300/500] CNCCCNC(=O)c1ccc(F)cc1... int=4 res=4 vina=-6.2 t=5233s
+  [325/500] CC(=O)NCCN1CCOCC1... int=3 res=2 vina=-5.4 t=5812s
+  [350/500] CCNCCN1CCOCC1... int=1 res=1 vina=-4.5 t=6305s
+  [375/500] Clc1cccc(N2CCOCC2)c1... int=1 res=1 vina=-5.7 t=6805s
+  [400/500] NCCCNC(=O)c1ccccc1... int=6 res=6 vina=-5.9 t=7332s
+  [425/500] N=C(N)NCCCNCCN1CCOCC1... int=5 res=5 vina=-6.1 t=7902s
+  [450/500] NC(CCCNCCN1CCOCC1)C(=O)O... int=4 res=4 vina=-6.2 t=8479s
+  [475/500] c1cncc(N2CCNCC2)c1... int=2 res=2 vina=-5.4 t=8933s
+  [500/500] c1ccc(N2CCNCC2)cc1... int=2 res=2 vina=-5.7 t=9435s
+
+Results → paper/experiments/results_v3/4DFR/bo_seed8/results.json
+Total: 9435s (18.9s/iter)

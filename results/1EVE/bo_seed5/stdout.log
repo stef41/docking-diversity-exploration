@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 5
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed5
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=28s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=57s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=83s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=111s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=138s
+  [25/500] CC(C)(O)c1ccccc1... int=4 res=4 vina=-6.8 t=660s
+  [50/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=1040s
+  [75/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=1387s
+  [100/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=1727s
+  [125/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2070s
+  [150/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2430s
+  [175/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=2794s
+  [200/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3150s
+  [225/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3515s
+  [250/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=3876s
+  [275/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=4241s
+  [300/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=4619s
+  [325/500] Cn1c(=O)c2c(ncn2C)n(C)c1=O... int=4 res=4 vina=-6.8 t=5013s
+  [350/500] O=C(O)C=Cc1ccc(O)cc1... int=5 res=5 vina=-7.5 t=5403s
+  [375/500] O=C(O)C=Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.8 t=5808s
+  [400/500] CC(C)(O)c1ccccc1... int=4 res=4 vina=-6.8 t=6225s
+  [425/500] COc1cc(C=O)ccc1O... int=4 res=4 vina=-6.3 t=6645s
+  [450/500] CC(C)c1ccc(O)c(O)c1... int=5 res=5 vina=-7.5 t=7065s
+  [475/500] CC(N)Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.3 t=7494s
+  [500/500] CC(N)Cc1ccc(O)c(O)c1... int=5 res=5 vina=-7.3 t=7935s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed5/results.json
+Total: 7935s (15.9s/iter)

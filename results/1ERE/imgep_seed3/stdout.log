@@ -1,0 +1,38 @@
+============================================================
+  Method: imgep
+  Target: 1ERE
+  Seed: 3
+  Iterations: 500
+  Output: paper/experiments/results_v3/1ERE/imgep_seed3
+============================================================
+Target: 1ERE (Estrogen Receptor α, Nuclear receptor)
+Pocket residues: 71
+Behavior dim: 214
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-6.8 t=13s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.4 t=24s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-6.8 t=37s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=47s
+  [5/500] OC(=O)c1ccccc1O... int=5 res=5 vina=-6.2 t=58s
+  [25/500] CC1(C)SC2C(NC(=O)Cc3ccc(O)cc3)C(=O)N2C1C... int=6 res=5 vina=-5.2 t=306s
+  [50/500] COc1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C3C(=O... int=6 res=6 vina=-4.0 t=641s
+  [75/500] CCOC(=O)c1ccc(C(N)=O)cc1OC(C)=O... int=4 res=4 vina=-7.1 t=965s
+  [100/500] CC(=O)Nc1ccc(C(C)C(=O)O)cc1... int=9 res=8 vina=-7.0 t=1310s
+  [125/500] CC(=O)Nc1cccc(F)c1... int=7 res=7 vina=-6.1 t=1655s
+  [150/500] CCOC(=O)c1ccc(Cl)cc1OC(=O)CCCO... int=9 res=9 vina=-7.4 t=1999s
+  [175/500] COC(=O)c1ccc(C=O)cc1OC(=O)CCCN... int=7 res=7 vina=-7.3 t=2350s
+  [200/500] Nc1ccc(Br)cc1... int=3 res=3 vina=-5.3 t=2680s
+  [225/500] O=C(O)c1cc(Cl)cc(Cl)c1... int=5 res=5 vina=-6.3 t=3035s
+  [250/500] CCOC(=O)C(C)c1ccc(NC(C)=O)cc1... int=8 res=8 vina=-7.2 t=3377s
+  [275/500] CCOC(=O)c1cc(OC)c(C(=O)OCC)c(OC(C)=O)c1... int=10 res=9 vina=-7.0 t=3705s
+  [300/500] CCOC(=O)c1c(O)cc(OC)cc1OC(C)=O... int=3 res=3 vina=-6.4 t=4053s
+  [325/500] CCOC(=O)c1cc(Cl)c(Cl)cc1OC(=O)CCCO... int=6 res=6 vina=-7.6 t=4411s
+  [350/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(OC)c(OC)... int=6 res=6 vina=-2.1 t=4783s
+  [375/500] Nc1ccc(C(=O)CCl)cc1... int=4 res=4 vina=-6.0 t=5162s
+  [400/500] COC(=O)c1ccc(C(=O)OC)c(OC(=O)CCC(C)=O)c1... int=7 res=7 vina=-7.3 t=5539s
+  [425/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(OC)c(O)c... int=8 res=7 vina=-4.8 t=5907s
+  [450/500] CCCC(=O)Oc1ccc(N)cc1C(=O)O... int=5 res=4 vina=-7.2 t=6287s
+  [475/500] COC(=O)c1cc(OC(F)(F)F)ccc1OC... int=4 res=4 vina=-6.8 t=6678s
+  [500/500] CC(=O)Nc1ccc(CO)cc1... int=6 res=6 vina=-6.4 t=7041s
+
+Results → paper/experiments/results_v3/1ERE/imgep_seed3/results.json
+Total: 7041s (14.1s/iter)

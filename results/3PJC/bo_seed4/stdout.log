@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3PJC
+  Seed: 4
+  Iterations: 500
+  Output: paper/experiments/results_v3/3PJC/bo_seed4
+============================================================
+Target: 3PJC (CDK2, Kinase)
+Pocket residues: 60
+Behavior dim: 181
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-8.6 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.7 t=32s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=7 res=7 vina=-6.7 t=48s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=9 res=9 vina=-6.2 t=63s
+  [5/500] OC(=O)c1ccccc1O... int=6 res=6 vina=-6.1 t=76s
+  [25/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.7 t=433s
+  [50/500] CC(C(=O)O)c1ccc(N(C)C)cc1... int=8 res=8 vina=-6.9 t=867s
+  [75/500] CN(C)c1ccc(C=Cc2ccc(C(=N)N)cc2)cc1... int=7 res=6 vina=-8.9 t=1303s
+  [100/500] CN(C)c1ccc(CC(N)C(=O)O)cc1... int=10 res=8 vina=-6.8 t=1730s
+  [125/500] COC(=O)c1ccc(C2N=C(C)NC2=O)cc1... int=6 res=6 vina=-7.5 t=2149s
+  [150/500] CC(=O)Nc1ccc(C2N=C(C)NC2=O)cc1... int=8 res=7 vina=-7.8 t=2593s
+  [175/500] CC(C(=O)O)c1ccc(N2CCOCC2)cc1... int=7 res=7 vina=-7.5 t=3054s
+  [200/500] CC(=O)CCC(=O)c1ccc(N2CCOCC2)cc1... int=5 res=5 vina=-7.9 t=3505s
+  [225/500] NC(=S)Nc1ccc(OCc2ccc([N+](=O)[O-])cc2)cc... int=8 res=7 vina=-8.5 t=3960s
+  [250/500] CC(O)c1ccc(S(=O)(=O)c2ccc(F)cc2[S-])c([S... int=7 res=6 vina=-8.5 t=4414s
+  [275/500] CC(N)c1ccc(CCc2ccc(N(C)C)cc2)cc1... int=10 res=9 vina=-8.6 t=4892s
+  [300/500] CC(=O)Nc1ccc(Oc2ccc(NC=O)cc2)cc1... int=9 res=9 vina=-8.3 t=5370s
+  [325/500] CC1=NC(c2ccc(NC=O)cc2)C(=O)N1... int=8 res=6 vina=-7.3 t=5856s
+  [350/500] O=CNc1ccc(-c2ccc(I)cc2)cc1... int=7 res=6 vina=-8.5 t=6347s
+  [375/500] NS(=O)(=O)c1ccc(N2CCOCC2)cc1... int=8 res=7 vina=-7.1 t=6829s
+  [400/500] CC(O)c1cccc(-c2ccc(NC=O)cc2)c1... int=5 res=4 vina=-8.9 t=7342s
+  [425/500] NC(=O)Cc1ccc(N2CCOCC2)cc1... int=7 res=5 vina=-7.3 t=7873s
+  [450/500] CC(=O)Nc1ccc(N2CCOCC2)cc1... int=4 res=4 vina=-7.0 t=8435s
+  [475/500] NS(=O)(=O)c1ccc(-c2ccc(I)cc2)cc1[S-]... int=5 res=4 vina=-8.8 t=9039s
+  [500/500] NC(Cc1ccc(N2CCOCC2)cc1)C(=O)O... int=9 res=7 vina=-7.8 t=9703s
+
+Results → paper/experiments/results_v3/3PJC/bo_seed4/results.json
+Total: 9703s (19.4s/iter)

@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3V8D
+  Seed: 0
+  Iterations: 500
+  Output: paper/experiments/results_v3/3V8D/bo_seed0
+============================================================
+Target: 3V8D (Thrombin, Serine protease)
+Pocket residues: 95
+Behavior dim: 286
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=10 res=9 vina=-9.1 t=14s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-6.8 t=25s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=8 res=6 vina=-6.8 t=38s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=7 res=5 vina=-6.1 t=49s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.0 t=62s
+  [25/500] CCCCC(=O)Oc1cc(Cl)c(Cl)cc1C(=O)OCC... int=6 res=6 vina=-6.4 t=356s
+  [50/500] CC(N)Cc1ccc(O)c(O)c1... int=6 res=6 vina=-6.4 t=719s
+  [75/500] OCc1ccc(C=NO)cc1... int=4 res=4 vina=-6.0 t=1029s
+  [100/500] CC(C(=O)O)c1ccc(N(C)C)cc1... int=6 res=6 vina=-5.9 t=1365s
+  [125/500] CN(C)c1ccc(CO)cc1... int=3 res=3 vina=-5.5 t=1686s
+  [150/500] CN(C)c1ccc(CO)cc1... int=3 res=3 vina=-5.5 t=2020s
+  [175/500] CN(C)c1ccc(Cl)cc1... int=3 res=3 vina=-5.1 t=2379s
+  [200/500] CC(N)c1ccc(N(C)C)cc1... int=4 res=4 vina=-5.6 t=2721s
+  [225/500] CN(C)c1ccc(CO)cc1... int=3 res=3 vina=-5.5 t=3092s
+  [250/500] CC(=O)c1ccc(N(C)C)cc1... int=5 res=5 vina=-5.6 t=3453s
+  [275/500] CN(C)c1ccc(NC=O)cc1... int=3 res=3 vina=-5.4 t=3833s
+  [300/500] CN(C)c1ccc(CO)cc1... int=3 res=3 vina=-5.5 t=4209s
+  [325/500] Nc1ccc(NC(=O)c2ccc(Br)cc2)cc1... int=6 res=5 vina=-7.6 t=4596s
+  [350/500] CC(=O)N1CCN(c2ccc(N(C)C)cc2)CC1... int=1 res=1 vina=-6.8 t=4996s
+  [375/500] COc1ccc(-c2ccc(N(C)C)cc2)cc1... int=2 res=2 vina=-6.8 t=5397s
+  [400/500] CN(C)c1ccc(-c2ccc(C(N)=O)cc2)cc1... int=2 res=2 vina=-7.3 t=5810s
+  [425/500] COc1ccc2nc(O)c(Cl)cc2c1... int=4 res=4 vina=-6.7 t=6224s
+  [450/500] COc1ccc2nc(O)c(Cl)cc2c1... int=4 res=4 vina=-6.7 t=6643s
+  [475/500] CCOC(=O)C(N)CCCC(=O)O... int=9 res=6 vina=-5.7 t=7091s
+  [500/500] OCC1OC(O)C(O)C(O)C1O... int=5 res=5 vina=-6.3 t=7579s
+
+Results → paper/experiments/results_v3/3V8D/bo_seed0/results.json
+Total: 7579s (15.2s/iter)

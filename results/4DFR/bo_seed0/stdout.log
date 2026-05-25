@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4DFR
+  Seed: 0
+  Iterations: 500
+  Output: paper/experiments/results_v3/4DFR/bo_seed0
+============================================================
+Target: 4DFR (DHFR, Oxidoreductase)
+Pocket residues: 55
+Behavior dim: 166
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=6 res=6 vina=-8.0 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=5 vina=-7.4 t=24s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=6 res=5 vina=-5.6 t=38s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=2 res=2 vina=-5.7 t=50s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-5.8 t=62s
+  [25/500] CC(=O)Nc1ccc(Cl)cc1... int=4 res=4 vina=-5.3 t=322s
+  [50/500] CC(C)(O)c1ccc(Cl)cc1... int=5 res=5 vina=-6.3 t=640s
+  [75/500] Nc1ccc(S(N)(=O)=O)cc1... int=4 res=4 vina=-5.9 t=952s
+  [100/500] CCCO... int=4 res=4 vina=-3.1 t=1258s
+  [125/500] OCCCCNCCCO... int=8 res=7 vina=-4.7 t=1588s
+  [150/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-4.6 t=1930s
+  [175/500] CCNCCCCO... int=5 res=4 vina=-4.3 t=2298s
+  [200/500] CCCCCCNCCO... int=6 res=6 vina=-4.6 t=2644s
+  [225/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-4.6 t=2992s
+  [250/500] CC(N)C(=O)O... int=0 res=0 vina=-4.0 t=3349s
+  [275/500] CC(=O)Nc1ccccc1... int=5 res=5 vina=-4.9 t=3697s
+  [300/500] CN(C)c1ccccc1... int=3 res=3 vina=-4.7 t=4055s
+  [325/500] CC(=O)NCCO... int=2 res=2 vina=-3.9 t=4456s
+  [350/500] CSCC(N)C(=O)O... int=3 res=3 vina=-4.2 t=5084s
+  [375/500] CC(N)c1ccc(F)cc1... int=6 res=5 vina=-5.8 t=5708s
+  [400/500] CC(CC(=O)O)C(=O)O... int=4 res=4 vina=-4.9 t=6305s
+  [425/500] CN(C)c1ccccc1... int=3 res=3 vina=-4.7 t=6906s
+  [450/500] CC(N)c1ccccc1... int=5 res=4 vina=-5.6 t=7472s
+  [475/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-4.6 t=7954s
+  [500/500] CC(C)CC(N)C(=O)O... int=0 res=0 vina=-4.7 t=8440s
+
+Results → paper/experiments/results_v3/4DFR/bo_seed0/results.json
+Total: 8440s (16.9s/iter)

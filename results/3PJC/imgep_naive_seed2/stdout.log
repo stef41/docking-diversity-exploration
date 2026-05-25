@@ -1,0 +1,38 @@
+============================================================
+  Method: imgep_naive
+  Target: 3PJC
+  Seed: 2
+  Iterations: 500
+  Output: paper/experiments/results_v3/3PJC/imgep_naive_seed2
+============================================================
+Target: 3PJC (CDK2, Kinase)
+Pocket residues: 60
+Behavior dim: 181
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-8.6 t=16s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.7 t=27s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=7 res=7 vina=-6.7 t=41s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=9 res=9 vina=-6.2 t=50s
+  [5/500] OC(=O)c1ccccc1O... int=6 res=6 vina=-6.1 t=61s
+  [25/500] NC(=O)Cc1ccc(CC(=O)NO)cc1... int=10 res=8 vina=-8.0 t=340s
+  [50/500] CC(C)(O)c1ccc(CC(=O)NO)cc1... int=8 res=6 vina=-8.4 t=770s
+  [75/500] O=C(Cc1ccc(CCCO)cc1)NO... int=9 res=7 vina=-8.0 t=1181s
+  [100/500] O=C(CCCO)NCCN1CCOCC1... int=4 res=4 vina=-6.0 t=1588s
+  [125/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.7 t=2053s
+  [150/500] CC(N)c1ccc(CC(=O)O)cc1... int=4 res=4 vina=-6.9 t=2513s
+  [175/500] CC(=O)N1CCN(c2ccc(C(=O)Nc3ccccc3)cc2)CC1... int=7 res=7 vina=-8.9 t=2960s
+  [200/500] CC(=O)N1CCN(c2ccc(N3CCCC3=O)cc2)CC1... int=4 res=4 vina=-8.4 t=3404s
+  [225/500] CC(=O)CCC(=O)c1ccc(C=Cc2ccccc2)cc1... int=13 res=12 vina=-8.7 t=3853s
+  [250/500] CN(C)c1ccc(CC(=O)NO)cc1... int=7 res=5 vina=-7.2 t=4311s
+  [275/500] CCOC(=O)C(N)Cc1ccc(C(C)(C)O)cc1... int=7 res=7 vina=-7.9 t=4745s
+  [300/500] CC(C)NCC(O)COc1ccc(N2CCCC2=O)cc1... int=8 res=7 vina=-7.8 t=5193s
+  [325/500] CC(C)(O)c1ccc(C(O)c2ccc(CC(N)C(=O)O)cc2)... int=13 res=12 vina=-9.5 t=5666s
+  [350/500] CCOC(=O)C(N)Cc1ccc(C(O)c2ccc(OC(C)=O)cc2... int=9 res=9 vina=-8.8 t=6146s
+  [375/500] CC(N)Cc1ccc(CC(=O)NO)cc1... int=9 res=8 vina=-8.0 t=6610s
+  [400/500] CCOC(=O)C(N)Cc1ccc(CC(C)C)cc1... int=9 res=8 vina=-7.4 t=7074s
+  [425/500] CCCCC(=O)NCCN1CCOCC1... int=3 res=3 vina=-5.9 t=7541s
+  [450/500] NS(=O)(=O)c1ccc(C=O)cc1[S-]... int=7 res=5 vina=-6.2 t=8004s
+  [475/500] CC(N)c1ccc(C(=O)c2ccc(C(=O)NCC(=O)O)cc2)... int=12 res=10 vina=-9.7 t=8463s
+  [500/500] NCCc1ccc(C=NO)cc1... int=9 res=8 vina=-6.8 t=8920s
+
+Results → paper/experiments/results_v3/3PJC/imgep_naive_seed2/results.json
+Total: 8920s (17.8s/iter)

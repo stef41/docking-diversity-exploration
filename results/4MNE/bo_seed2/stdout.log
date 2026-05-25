@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 4MNE
+  Seed: 2
+  Iterations: 500
+  Output: paper/experiments/results_v3/4MNE/bo_seed2
+============================================================
+Target: 4MNE (BRAF, Kinase)
+Pocket residues: 68
+Behavior dim: 205
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-7.8 t=15s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.8 t=29s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=4 res=4 vina=-6.1 t=42s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=8 res=6 vina=-6.2 t=55s
+  [5/500] OC(=O)c1ccccc1O... int=8 res=6 vina=-6.2 t=68s
+  [25/500] CC(=O)Nc1ccc(OCC(O)CNC(C)C)cc1... int=10 res=9 vina=-7.5 t=356s
+  [50/500] CC(C)NCC(O)COc1ccc(CCCO)cc1... int=11 res=8 vina=-7.6 t=722s
+  [75/500] CN(C)c1ccc(C=Cc2ccc(NC=O)cc2)cc1... int=6 res=6 vina=-7.0 t=1086s
+  [100/500] CC(O)c1cccc(-c2ccc(N(C)C)cc2)c1... int=7 res=7 vina=-8.2 t=1451s
+  [125/500] COc1ccc(CCc2ccc(N(C)C)cc2)cc1... int=6 res=6 vina=-8.1 t=1827s
+  [150/500] COc1ccc(C(=O)c2ccc(N(C)C)cc2)cc1... int=6 res=6 vina=-8.1 t=2200s
+  [175/500] CC(O)c1cccc(-c2ccc(N(C)C)cc2)c1... int=7 res=7 vina=-8.2 t=2589s
+  [200/500] COc1ccc(S(=O)(=O)Nc2ncccn2)cc1... int=4 res=4 vina=-7.4 t=2977s
+  [225/500] COc1ccc(N=Nc2ccc(NC(C)=O)cc2)cc1OC... int=4 res=4 vina=-6.1 t=3383s
+  [250/500] COc1cc(N=Nc2ccc(CC(N)C(=O)O)cc2)ccc1O... int=11 res=10 vina=-7.4 t=3794s
+  [275/500] CC(C)(O)c1ccc(N=Nc2ccc(O)cc2)cc1... int=7 res=7 vina=-8.0 t=4218s
+  [300/500] COc1ccc(N=Nc2ccc(N3CCN(C(C)=O)CC3)cc2)cc... int=6 res=5 vina=-7.5 t=4669s
+  [325/500] COC(=O)c1ccc(N=Nc2cc(Cl)c(OC)c(OC)c2)cc1... int=4 res=4 vina=-7.0 t=5150s
+  [350/500] COc1cc(N=Nc2ccc(S(N)(=O)=O)cc2)cc(Cl)c1O... int=7 res=6 vina=-7.0 t=5648s
+  [375/500] COc1cc(N=Nc2ccc(NC(N)=S)cc2)cc(Cl)c1OC... int=6 res=5 vina=-7.0 t=6160s
+  [400/500] COc1c(Cl)cc(N=Nc2ccc(N3CCCC3=O)cc2)cc1OC... int=4 res=3 vina=-7.6 t=6698s
+  [425/500] COC(=O)c1ccc(N=Nc2cc(Cl)c(OC)c(OC)c2)cc1... int=4 res=4 vina=-7.0 t=7243s
+  [450/500] COc1cc(N=Nc2ccc(C=CC(=O)O)cc2)cc(Cl)c1OC... int=3 res=3 vina=-7.2 t=7776s
+  [475/500] COC(=O)c1ccc(N=Nc2cc(Cl)c(OC)c(OC)c2)cc1... int=4 res=4 vina=-7.0 t=8305s
+  [500/500] COc1cc(N=Nc2ccc(C(=O)NCC(=O)O)cc2)cc(Cl)... int=5 res=5 vina=-7.5 t=8855s
+
+Results → paper/experiments/results_v3/4MNE/bo_seed2/results.json
+Total: 8855s (17.7s/iter)

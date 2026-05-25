@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1EVE
+  Seed: 2
+  Iterations: 500
+  Output: paper/experiments/results_v3/1EVE/bo_seed2
+============================================================
+Target: 1EVE (AChE, Hydrolase)
+Pocket residues: 76
+Behavior dim: 229
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=9 res=9 vina=-10.3 t=26s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=5 res=5 vina=-8.7 t=51s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-7.3 t=80s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=3 res=3 vina=-6.7 t=102s
+  [5/500] OC(=O)c1ccccc1O... int=4 res=4 vina=-6.9 t=121s
+  [25/500] NC(=O)CCC(N)C(=O)O... int=0 res=0 vina=-5.5 t=662s
+  [50/500] NS(=O)(=O)c1ccc(O)cc1[S-]... int=3 res=3 vina=-7.0 t=1318s
+  [75/500] CC(=O)NCC(=O)O... int=3 res=3 vina=-4.8 t=1661s
+  [100/500] CC(=O)Nc1ccccc1... int=4 res=4 vina=-6.5 t=1999s
+  [125/500] COc1ccccc1... int=3 res=3 vina=-5.5 t=2348s
+  [150/500] CC(CC(=O)O)C(=O)O... int=4 res=4 vina=-5.3 t=2681s
+  [175/500] CC(N)C(=O)O... int=0 res=0 vina=-4.2 t=3043s
+  [200/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-5.7 t=3409s
+  [225/500] CSCC(N)C(=O)O... int=5 res=5 vina=-4.5 t=3759s
+  [250/500] CC(C)CC(N)C(=O)O... int=0 res=0 vina=-5.7 t=4114s
+  [275/500] CCC(C)C(N)C(=O)O... int=0 res=0 vina=-5.7 t=4469s
+  [300/500] CSCC(N)C(=O)O... int=5 res=5 vina=-4.5 t=4828s
+  [325/500] CC(C)(O)c1ccccc1... int=4 res=4 vina=-6.8 t=5189s
+  [350/500] CC(=O)NCCO... int=7 res=7 vina=-4.4 t=5553s
+  [375/500] CC(N)c1ccc(F)cc1... int=4 res=4 vina=-6.6 t=5909s
+  [400/500] CSCC(N)C(=O)O... int=5 res=5 vina=-4.5 t=6267s
+  [425/500] CC(N)c1ccc(F)cc1... int=4 res=4 vina=-6.6 t=6635s
+  [450/500] CC(CC(=O)O)C(=O)O... int=4 res=4 vina=-5.3 t=6995s
+  [475/500] CSCC(N)C(=O)O... int=5 res=5 vina=-4.5 t=7358s
+  [500/500] CC(CC(=O)O)C(=O)O... int=4 res=4 vina=-5.3 t=7730s
+
+Results → paper/experiments/results_v3/1EVE/bo_seed2/results.json
+Total: 7730s (15.5s/iter)

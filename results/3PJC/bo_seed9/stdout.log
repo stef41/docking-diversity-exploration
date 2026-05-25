@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 3PJC
+  Seed: 9
+  Iterations: 500
+  Output: paper/experiments/results_v3/3PJC/bo_seed9
+============================================================
+Target: 3PJC (CDK2, Kinase)
+Pocket residues: 60
+Behavior dim: 181
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-8.6 t=20s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=8 res=8 vina=-7.7 t=37s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=7 res=7 vina=-6.7 t=54s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=9 res=9 vina=-6.2 t=70s
+  [5/500] OC(=O)c1ccccc1O... int=6 res=6 vina=-6.1 t=85s
+  [25/500] CC(=O)Oc1c(OC(=O)CCCO)cc(CCN)cc1C(=O)O... int=10 res=10 vina=-8.3 t=449s
+  [50/500] NC(Cc1cnc[nH]1)C(=O)O... int=0 res=0 vina=-5.7 t=898s
+  [75/500] ON=Cc1ccc(F)cc1... int=7 res=7 vina=-6.2 t=1291s
+  [100/500] OCCCc1ccc(Br)cc1... int=5 res=5 vina=-6.4 t=1700s
+  [125/500] CC(=O)c1ccc(C=NO)cc1... int=7 res=7 vina=-6.6 t=2103s
+  [150/500] CN(C)c1ccc(C=NO)cc1... int=6 res=6 vina=-6.5 t=2491s
+  [175/500] COc1ccc(C=NO)cc1... int=4 res=4 vina=-6.2 t=2867s
+  [200/500] O=C(Cc1ccc(F)cc1)NO... int=8 res=8 vina=-7.1 t=3263s
+  [225/500] CC(C)C(N)C(=O)O... int=0 res=0 vina=-5.1 t=3658s
+  [250/500] CC(C(=O)O)c1ccc(F)cc1... int=6 res=6 vina=-6.7 t=4034s
+  [275/500] O=C(O)c1ccc(Cl)c(Cl)c1... int=6 res=6 vina=-6.5 t=4394s
+  [300/500] CC(C(=O)O)c1ccc(F)cc1... int=6 res=6 vina=-6.7 t=4770s
+  [325/500] CN(C)c1ccc(N(C)C)cc1... int=3 res=3 vina=-5.4 t=5172s
+  [350/500] CN(C)c1ccc(Br)cc1... int=3 res=3 vina=-5.3 t=5567s
+  [375/500] CC(=O)c1ccc(N(C)C)cc1... int=2 res=2 vina=-5.9 t=5974s
+  [400/500] CC(=O)Oc1ccc(N(C)C)cc1... int=8 res=8 vina=-6.1 t=6386s
+  [425/500] COC(=O)c1ccc(N(C)C)cc1... int=5 res=5 vina=-6.1 t=6828s
+  [450/500] CC(C)c1ccc(N(C)C)cc1... int=3 res=3 vina=-6.0 t=7307s
+  [475/500] NC(=O)Cc1ccc(I)cc1... int=7 res=5 vina=-6.1 t=7816s
+  [500/500] CN(C)c1ccc(C(C)(C)O)cc1... int=1 res=1 vina=-6.4 t=8391s
+
+Results → paper/experiments/results_v3/3PJC/bo_seed9/results.json
+Total: 8391s (16.8s/iter)

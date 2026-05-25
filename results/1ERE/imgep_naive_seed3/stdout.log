@@ -1,0 +1,38 @@
+============================================================
+  Method: imgep_naive
+  Target: 1ERE
+  Seed: 3
+  Iterations: 500
+  Output: paper/experiments/results_v3/1ERE/imgep_naive_seed3
+============================================================
+Target: 1ERE (Estrogen Receptor α, Nuclear receptor)
+Pocket residues: 71
+Behavior dim: 214
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-6.8 t=10s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.4 t=22s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-6.8 t=36s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=47s
+  [5/500] OC(=O)c1ccccc1O... int=5 res=5 vina=-6.2 t=60s
+  [25/500] CC(C)Cc1ccc(CC(N)C(=O)O)cc1... int=8 res=8 vina=-7.5 t=326s
+  [50/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(OC)cc3)C... int=7 res=7 vina=-6.4 t=738s
+  [75/500] CC(=O)Nc1ccc(CC(=O)NC2C(=O)N3C2SC(C)(C)C... int=6 res=6 vina=-0.8 t=1183s
+  [100/500] CN(C)c1ccc(CC(N)C(=O)O)cc1... int=6 res=5 vina=-6.8 t=1623s
+  [125/500] CC1(C)SC2C(NC(=O)Cc3ccc(C=CC(=O)O)cc3)C(... int=9 res=8 vina=-3.6 t=2084s
+  [150/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(=O)Nc4cccc(N)c... int=9 res=9 vina=-3.1 t=2599s
+  [175/500] CC1(C)SC2C(NC(=O)Cc3ccc(CC(=O)NO)cc3)C(=... int=9 res=9 vina=-2.4 t=3182s
+  [200/500] CC1(C)SC2C(NC(=O)Cc3ccc(CC(=O)NO)cc3)C(=... int=9 res=9 vina=-2.4 t=3846s
+  [225/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(=O)Nc4cccc(C=O... int=9 res=9 vina=-3.5 t=4432s
+  [250/500] CC1(C)SC2C(NC(=O)Cc3ccc(OCCN4CCCCC4)cc3)... int=11 res=10 vina=-5.3 t=5040s
+  [275/500] CC1(C)SC2C(NC(=O)Cc3ccc(OC(=O)c4cccc(N)c... int=8 res=8 vina=-6.4 t=5602s
+  [300/500] CC1(C)SC2C(NC(=O)Cc3ccc(C(=O)NCCN4CCOCC4... int=8 res=8 vina=-7.1 t=6132s
+  [325/500] CC1(C)SC2C(NC(=O)Cc3ccc(Br)cc3)C(=O)N2C1... int=6 res=5 vina=-3.8 t=6690s
+  [350/500] CCOC(=O)C1N2C(=O)C(NC(=O)C(NC(=O)Cc3ccc(... int=9 res=9 vina=-3.9 t=7272s
+  [375/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(-c4cccc(... int=8 res=8 vina=-0.3 t=7872s
+  [400/500] CC(O)c1cc(O)cc(-c2ccc(CC(=O)NC3C(=O)N4C3... int=9 res=8 vina=-4.5 t=8449s
+  [425/500] CCOC(=O)C1N2C(=O)C(NC(=O)Cc3ccc(C(=N)N)c... int=10 res=9 vina=-4.7 t=9003s
+  [450/500] CC1(C)SC2C(NC(=O)Cc3ccc(CCNC(=O)c4ccccc4... int=12 res=11 vina=-6.6 t=9539s
+  [475/500] CCOC(=O)C1N2C(=O)C(NC(=O)C(NC(=O)Cc3ccc(... int=7 res=7 vina=-2.0 t=10115s
+  [500/500] CC1(C)SC2C(NC(=O)COc3ccc(C(=O)c4ccccc4)c... int=10 res=9 vina=-6.5 t=10632s
+
+Results → paper/experiments/results_v3/1ERE/imgep_naive_seed3/results.json
+Total: 10632s (21.3s/iter)

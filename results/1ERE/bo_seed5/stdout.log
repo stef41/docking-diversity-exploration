@@ -1,0 +1,38 @@
+============================================================
+  Method: bo
+  Target: 1ERE
+  Seed: 5
+  Iterations: 500
+  Output: paper/experiments/results_v3/1ERE/bo_seed5
+============================================================
+Target: 1ERE (Estrogen Receptor α, Nuclear receptor)
+Pocket residues: 71
+Behavior dim: 214
+  [1/500] CC1(C)SC2C(NC(=O)Cc3ccccc3)C(=O)N2C1C(=O... int=5 res=5 vina=-6.8 t=12s
+  [2/500] CC(C)Cc1ccc(C(C)C(=O)O)cc1... int=6 res=6 vina=-7.4 t=25s
+  [3/500] CC(=O)Oc1ccccc1C(=O)O... int=5 res=5 vina=-6.8 t=37s
+  [4/500] CC(=O)Nc1ccc(O)cc1... int=5 res=5 vina=-6.1 t=47s
+  [5/500] OC(=O)c1ccccc1O... int=5 res=5 vina=-6.2 t=62s
+  [25/500] COc1cc(-c2cccc(N)c2)ccc1O... int=5 res=5 vina=-8.0 t=359s
+  [50/500] CC(CS)C(=O)N1CCCC1C(=O)OCCO... int=5 res=5 vina=-6.9 t=724s
+  [75/500] O=C(O)c1cccc(Cl)c1... int=4 res=4 vina=-6.1 t=1078s
+  [100/500] COc1cc(C=O)ccc1O... int=2 res=2 vina=-5.6 t=1423s
+  [125/500] COc1ccc2nc(O)c(Cl)cc2c1... int=3 res=2 vina=-6.8 t=1775s
+  [150/500] ON=Cc1ccc(Cl)cc1... int=3 res=3 vina=-6.3 t=2143s
+  [175/500] COc1ccc(-c2cccc(NC=O)c2)cc1OC... int=7 res=7 vina=-7.4 t=2538s
+  [200/500] O=C(CCl)c1ccc(Br)cc1... int=6 res=6 vina=-5.8 t=2906s
+  [225/500] CC(C(=O)O)c1ccc(Br)cc1... int=7 res=7 vina=-6.7 t=3254s
+  [250/500] CC(C)(O)c1ccc(Br)cc1... int=7 res=7 vina=-6.4 t=3610s
+  [275/500] NC(=O)Cc1ccc(Br)cc1... int=7 res=6 vina=-6.0 t=3953s
+  [300/500] NS(=O)(=O)c1ccc(Br)cc1... int=6 res=6 vina=-6.2 t=4302s
+  [325/500] NC(=S)Nc1ccc(Br)cc1... int=4 res=4 vina=-5.4 t=4678s
+  [350/500] CC1=NC(c2ccc(Br)cc2)C(=O)N1... int=2 res=2 vina=-6.9 t=5050s
+  [375/500] CC1=NC(c2ccc(Br)cc2)C(=O)N1... int=2 res=2 vina=-6.9 t=5446s
+  [400/500] COC(=O)c1ccc(Br)cc1... int=6 res=6 vina=-5.9 t=5861s
+  [425/500] Brc1ccc(-c2ccc(I)cc2)cc1... int=4 res=4 vina=-4.9 t=6296s
+  [450/500] CC(C)Cc1ccc(Br)cc1... int=5 res=5 vina=-6.1 t=6755s
+  [475/500] CC(C(=O)O)c1ccc(Br)cc1... int=7 res=7 vina=-6.7 t=7264s
+  [500/500] CC1=NC(c2ccc(Br)cc2)C(=O)N1... int=2 res=2 vina=-6.9 t=7782s
+
+Results → paper/experiments/results_v3/1ERE/bo_seed5/results.json
+Total: 7782s (15.6s/iter)
