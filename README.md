@@ -124,9 +124,9 @@ random search when nearest-neighbor retrieval is **discriminative**. We define
 
 $$R \;=\; \frac{\mathbb{E}_{g \sim P_\text{goal}}\,\min_{b \in \mathcal{B}} \lVert g - b \rVert_2}{\mathbb{E}_{b, b' \sim \mathcal{B}}\,\lVert b - b' \rVert_2}$$
 
-Empirically, **R&nbsp;&gg;&nbsp;10** &rarr; goal-directed retrieval degenerates
-toward random parent selection. Our residue-level fingerprint reduces $R$ from
-$\sim$128 (atom-level baseline) to $\sim$8, which is when IMGEP variants begin
+Empirically, **R &raquo; 10** &rarr; goal-directed retrieval degenerates
+toward random parent selection. Our residue-level fingerprint reduces *R* from
+**~128** (atom-level baseline) to **~8**, which is when IMGEP variants begin
 to beat random search.
 
 ## Software versions
