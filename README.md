@@ -1,8 +1,9 @@
 # Diversity-Seeking Exploration for Docking-Predicted Interaction Profiles
 
 Code, configurations, prepared targets, per-run results, and figure outputs
-for the JCIM 2026 manuscript *"Diversity-Seeking Exploration Discovers Broader
-Docking-Predicted Interaction Profiles Across Protein Families"* (Bugaud, 2026).
+for the manuscript *"Diversity-Seeking Exploration Discovers Broader
+Docking-Predicted Interaction Profiles Across Protein Families"* (Bugaud, 2026),
+submitted to the Journal of Chemical Information and Modeling.
 
 This repository contains the **paper-specific** artifacts. The general-purpose
 exploration framework used to run the experiments is the separate `adtool`
