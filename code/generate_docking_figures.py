@@ -25,9 +25,18 @@ from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit import RDLogger
 RDLogger.DisableLog('rdApp.*')
 
-RESULTS_DIR = "/data/users/zacharie/adtool/paper/experiments/results_v3"
-OUTPUT_DIR = "/data/users/zacharie/adtool/paper/experiments/figures_v3"
-PDB_FILE = "/data/users/zacharie/adtool/examples/docking/systems/P22680_3V8D_A.pdb"
+import argparse as _argparse
+_ap = _argparse.ArgumentParser(add_help=False)
+_ap.add_argument('--results-dir', default='results',
+                 help='directory containing per-run results.json (default: results)')
+_ap.add_argument('--out', dest='output_dir', default='figures',
+                 help='directory to write generated figures (default: figures)')
+_ap.add_argument('--pdb-file', default='targets/3V8D_A_protein.pdb',
+                 help='reference PDB file for docking-schematic figure (default: targets/3V8D_A_protein.pdb)')
+_args, _ = _ap.parse_known_args()
+RESULTS_DIR = _args.results_dir
+OUTPUT_DIR = _args.output_dir
+PDB_FILE = _args.pdb_file
 
 METHODS = {
     "curiosity": "Curiosity-IMGEP",

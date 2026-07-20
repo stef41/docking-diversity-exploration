@@ -20,7 +20,12 @@ from collections import defaultdict
 from scipy import stats
 from itertools import combinations
 
-RESULTS_DIR = "/data/users/zacharie/adtool/paper/experiments/results_v3"
+import argparse as _argparse
+_ap = _argparse.ArgumentParser(add_help=False)
+_ap.add_argument('--results-dir', default='results',
+                 help='directory containing per-run results.json (default: results)')
+_args, _ = _ap.parse_known_args()
+RESULTS_DIR = _args.results_dir
 TARGETS = ["3V8D", "1ERE", "3EML", "1EVE", "4DFR", "3PJC", "4MNE"]
 METHOD_MAP = {
     "random": "Random",

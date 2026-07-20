@@ -36,8 +36,15 @@ matplotlib.rcParams.update({
     'savefig.bbox': 'tight',
 })
 
-RESULTS_DIR = "paper/experiments/results_v3"
-OUTPUT_DIR = "paper/experiments/figures_v3"
+import argparse as _argparse
+_ap = _argparse.ArgumentParser(add_help=False)
+_ap.add_argument('--results-dir', default='results',
+                 help='directory containing per-run results.json (default: results)')
+_ap.add_argument('--out', dest='output_dir', default='figures',
+                 help='directory to write generated figures + tables (default: figures)')
+_args, _ = _ap.parse_known_args()
+RESULTS_DIR = _args.results_dir
+OUTPUT_DIR = _args.output_dir
 
 TARGETS = ["3V8D", "1ERE", "3EML", "1EVE", "4DFR", "3PJC", "4MNE"]
 TARGET_NAMES = {

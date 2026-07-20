@@ -15,7 +15,15 @@ METHOD_LABELS = {
     "random": "Random", "imgep_naive": "IMGEP (naive)", "imgep": "IMGEP (adaptive)",
     "curiosity": "Curiosity-IMGEP", "bo": "Bayesian Opt.", "ga": "Genetic Alg."
 }
-RESULTS_DIR = "/data/users/zacharie/adtool/paper/experiments/results_v3"
+import argparse as _argparse
+_ap = _argparse.ArgumentParser(add_help=False)
+_ap.add_argument('--results-dir', default='results',
+                 help='directory containing per-run results.json (default: results)')
+_ap.add_argument('--out', dest='output_dir', default='figures',
+                 help='directory to write outputs (default: figures)')
+_args, _ = _ap.parse_known_args()
+RESULTS_DIR = _args.results_dir
+OUTPUT_DIR = _args.output_dir
 
 def compute_tanimoto_diversity(smiles_list):
     fps = []
