@@ -32,10 +32,11 @@ METHOD_MAP = {
     "imgep_naive": "IMGEP (naive)",
     "imgep": "IMGEP (adaptive)",
     "curiosity": "Curiosity-IMGEP",
-    "bo": "UCB Heuristic",
+    "bo": "Aff-Div",
     "ga": "Genetic Alg.",
     "mapelites": "MAP-Elites",
     "novelty": "Novelty Search",
+    "nsga2": "NSGA-II",
 }
 METHODS = list(METHOD_MAP.keys())
 SEEDS = list(range(10))

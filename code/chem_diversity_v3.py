@@ -10,10 +10,11 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 from rdkit.DataStructs import TanimotoSimilarity
 
 TARGETS = ["3V8D", "1ERE", "3EML", "1EVE", "4DFR", "3PJC", "4MNE"]
-METHODS = ["random", "imgep_naive", "imgep", "curiosity", "bo", "ga"]
+METHODS = ["random", "imgep_naive", "imgep", "curiosity", "bo", "ga", "mapelites", "novelty", "nsga2"]
 METHOD_LABELS = {
     "random": "Random", "imgep_naive": "IMGEP (naive)", "imgep": "IMGEP (adaptive)",
-    "curiosity": "Curiosity-IMGEP", "bo": "Bayesian Opt.", "ga": "Genetic Alg."
+    "curiosity": "Curiosity-IMGEP", "bo": "Aff-Div", "ga": "Genetic Alg.",
+    "mapelites": "MAP-Elites", "novelty": "Novelty Search", "nsga2": "NSGA-II"
 }
 import argparse as _argparse
 _ap = _argparse.ArgumentParser(add_help=False)

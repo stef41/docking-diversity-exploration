@@ -56,19 +56,21 @@ TARGET_FAMILIES = {
     "1EVE": "Hydrolase", "4DFR": "Oxidoreductase", "3PJC": "Kinase", "4MNE": "Kinase"
 }
 
-METHODS = ["random", "imgep_naive", "imgep", "curiosity", "bo", "ga", "mapelites", "novelty"]
+METHODS = ["random", "imgep_naive", "imgep", "curiosity", "bo", "ga", "mapelites", "novelty", "nsga2"]
 METHOD_LABELS = {
     "random": "Random", "imgep_naive": "IMGEP (naive)",
     "imgep": "IMGEP (adaptive)", "curiosity": "Curiosity-IMGEP",
-    "bo": "UCB Heuristic", "ga": "Genetic Alg.",
-    "mapelites": "MAP-Elites", "novelty": "Novelty Search"
+    "bo": "Aff-Div", "ga": "Genetic Alg.",
+    "mapelites": "MAP-Elites", "novelty": "Novelty Search",
+    "nsga2": "NSGA-II"
 }
 # Colorblind-friendly palette (Wong 2011) — consistent with figures_nature.py
 METHOD_COLORS = {
     "random": "#999999", "imgep_naive": "#CC79A7",
     "imgep": "#56B4E9", "curiosity": "#E69F00",
     "bo": "#882255", "ga": "#009E73",
-    "mapelites": "#0072B2", "novelty": "#D55E00"
+    "mapelites": "#0072B2", "novelty": "#D55E00",
+    "nsga2": "#F0E442"
 }
 SEEDS = list(range(10))
 

@@ -42,16 +42,18 @@ METHODS = {
     "curiosity": "Curiosity-IMGEP",
     "mapelites": "MAP-Elites",
     "random": "Random",
-    "bo": "UCB Heuristic",
+    "bo": "Aff-Div",
     "ga": "Genetic Alg.",
+    "nsga2": "NSGA-II",
 }
 # Colorblind-friendly palette (Wong 2011) — consistent with figures_nature.py
 METHOD_COLORS = {
     "Curiosity-IMGEP": "#E69F00",
     "MAP-Elites": "#0072B2",
     "Random": "#999999",
-    "UCB Heuristic": "#882255",
+    "Aff-Div": "#882255",
     "Genetic Alg.": "#009E73",
+    "NSGA-II": "#F0E442",
 }
 
 TARGET = "3V8D"
@@ -248,8 +250,8 @@ def fig_pocket_contact_map():
            color=METHOD_COLORS["Curiosity-IMGEP"], alpha=0.85)
     ax.bar(x, counts_rnd[order], width, label="Random",
            color=METHOD_COLORS["Random"], alpha=0.85)
-    ax.bar(x + width, counts_bo[order], width, label="Bayesian Opt.",
-           color=METHOD_COLORS["Bayesian Opt."], alpha=0.85)
+    ax.bar(x + width, counts_bo[order], width, label="Aff-Div",
+           color=METHOD_COLORS["Aff-Div"], alpha=0.85)
 
     # Label top residues
     res_labels = [str(residues[i]) if i < len(residues) else str(i) for i in order]
@@ -438,7 +440,7 @@ def fig_molecule_comparison():
         ("mapelites", "MAP-Elites"),
         ("random", "Random"),
         ("ga", "Genetic Alg."),
-        ("bo", "Bayesian Opt."),
+        ("bo", "Aff-Div"),
     ]
 
     for idx, (method, name) in enumerate(methods_to_show):
