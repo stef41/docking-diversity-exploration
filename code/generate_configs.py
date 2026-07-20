@@ -13,7 +13,7 @@ import json
 import os
 from itertools import product
 
-OUTPUT_DIR = "paper/experiments/configs"
+OUTPUT_DIR = "configs"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ─── Base templates ───
@@ -92,17 +92,17 @@ def write_config(name, config):
 
 print("Main experiments:")
 write_config("main_random_3v8d", make_config(
-    "./paper/experiments/results/main_random_3v8d",
+    "./results/main_random_3v8d",
     "adtool.explorers.IMGEPExplorer.IMGEPExplorer",
     random_config()))
 
 write_config("main_imgep_3v8d", make_config(
-    "./paper/experiments/results/main_imgep_3v8d",
+    "./results/main_imgep_3v8d",
     "adtool.explorers.IMGEPExplorer.IMGEPExplorer",
     imgep_config()))
 
 write_config("main_curiosity_3v8d", make_config(
-    "./paper/experiments/results/main_curiosity_3v8d",
+    "./results/main_curiosity_3v8d",
     "adtool.explorers.CuriosityIMGEPExplorer.IMGEPExplorer",
     curiosity_config()))
 
@@ -113,7 +113,7 @@ print("\nAblation: equilibration time:")
 for T in [1, 5, 10, 25]:
     name = f"ablation_equil{T}_imgep_3v8d"
     write_config(name, make_config(
-        f"./paper/experiments/results/{name}",
+        f"./results/{name}",
         "adtool.explorers.IMGEPExplorer.IMGEPExplorer",
         imgep_config(equil_time=T)))
 
@@ -124,7 +124,7 @@ print("\nAblation: novelty weight:")
 for w in [0.0, 0.25, 0.5, 0.75, 1.0]:
     name = f"ablation_novelty{w:.2f}_curiosity_3v8d"
     write_config(name, make_config(
-        f"./paper/experiments/results/{name}",
+        f"./results/{name}",
         "adtool.explorers.CuriosityIMGEPExplorer.IMGEPExplorer",
         curiosity_config(novelty_weight=w)))
 

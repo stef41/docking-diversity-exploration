@@ -6,10 +6,10 @@ Multi-target support, competitive baselines (BO, GA), larger CReM DB,
 ablation-ready behavior space.
 
 Usage:
-  python paper/experiments/run_experiment_v3.py \
-      --method curiosity --seed 0 --iterations 500 \
-      --target 3V8D \
-      --output_dir paper/experiments/results_v3/3V8D/curiosity_seed0
+  python code/run_experiment_v3.py \\
+      --method curiosity --seed 0 --iterations 500 \\
+      --target 3V8D \\
+      --output_dir results/3V8D/curiosity_seed0
 """
 import argparse
 import json
@@ -39,59 +39,60 @@ from rdkit import RDLogger
 RDLogger.DisableLog('rdApp.*')
 
 # ─── Target configurations ───
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-GNINA_BIN = os.path.join(BASE_DIR, "examples/docking/systems/gnina")
+# BASE_DIR = repo root (parent of code/). Env var REPO_ROOT overrides for out-of-tree installs.
+BASE_DIR = os.environ.get("REPO_ROOT",
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# GNINA binary: expect on PATH or via GNINA_BIN env; the value below is only a hint.
+GNINA_BIN = os.environ.get("GNINA_BIN", "gnina")
 
 TARGETS = {
     "3V8D": {
         "name": "CYP7A1",
         "family": "Oxidoreductase",
-        "protein": os.path.join(BASE_DIR, "examples/docking/systems/P22680_3V8D_A.pdb"),
-        "box": os.path.join(BASE_DIR, "examples/docking/systems/P22680_3V8D_A_box_2.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/3V8D_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/3V8D_A_box.txt"),
     },
     "1ERE": {
         "name": "Estrogen Receptor α",
         "family": "Nuclear receptor",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/1ERE_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/1ERE_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/1ERE_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/1ERE_A_box.txt"),
     },
     "3EML": {
         "name": "A2AR",
         "family": "GPCR",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/3EML_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/3EML_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/3EML_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/3EML_A_box.txt"),
     },
     "1EVE": {
         "name": "AChE",
         "family": "Hydrolase",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/1EVE_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/1EVE_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/1EVE_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/1EVE_A_box.txt"),
     },
     "4DFR": {
         "name": "DHFR",
         "family": "Oxidoreductase",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/4DFR_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/4DFR_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/4DFR_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/4DFR_A_box.txt"),
     },
     "3PJC": {
         "name": "JAK3",
         "family": "Kinase",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/3PJC_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/3PJC_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/3PJC_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/3PJC_A_box.txt"),
     },
     "4MNE": {
         "name": "BRAF",
         "family": "Kinase",
-        "protein": os.path.join(BASE_DIR, "paper/experiments/targets/4MNE_A_protein.pdb"),
-        "box": os.path.join(BASE_DIR, "paper/experiments/targets/4MNE_A_box.txt"),
+        "protein": os.path.join(BASE_DIR, "targets/4MNE_A_protein.pdb"),
+        "box": os.path.join(BASE_DIR, "targets/4MNE_A_box.txt"),
     },
 }
 
 # CReM databases (try large first, then v2, then v1)
 CREM_DBS = [
-    os.path.join(BASE_DIR, "paper/experiments/targets/crem_large.db"),
-    os.path.join(BASE_DIR, "examples/docking/maps/replacements02_sa2_v2.db"),
-    os.path.join(BASE_DIR, "examples/docking/maps/replacements02_sa2.db"),
+    os.path.join(BASE_DIR, "targets/crem_large.db"),
 ]
 CREM_DBS = [db for db in CREM_DBS if os.path.exists(db)]
 

@@ -1,21 +1,21 @@
 #!/bin/bash
 # run_all_v3.sh — Nature-level experiment campaign
-# 7 targets × 6 methods × 10 seeds = 420 runs × 500 iterations each
+# 7 targets × 9 methods × 10 seeds = 630 runs × 500 iterations each
 #
 # Each run uses ~1 CPU core and takes ~40 minutes.
 # With --parallel N, runs N experiments simultaneously.
 #
 # Usage:
-#   bash paper/experiments/run_all_v3.sh --parallel 20
-#   bash paper/experiments/run_all_v3.sh --parallel 20 --target 3V8D  # single target
-#   bash paper/experiments/run_all_v3.sh --parallel 20 --method curiosity  # single method
+#   bash code/run_all_v3.sh --parallel 20
+#   bash code/run_all_v3.sh --parallel 20 --target 3V8D  # single target
+#   bash code/run_all_v3.sh --parallel 20 --method curiosity  # single method
 set -e
 
-cd "$(dirname "$0")/../.."  # cd to repo root
+cd "$(dirname "$0")/.."  # cd to repo root
 
-PYTHON=".venv/bin/python"
-SCRIPT="paper/experiments/run_experiment_v3.py"
-RESULTS="paper/experiments/results_v3"
+PYTHON="${PYTHON:-python3}"
+SCRIPT="code/run_experiment_v3.py"
+RESULTS="results"
 ITERS=500
 MAX_PARALLEL=20
 FILTER_TARGET=""
@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 TARGETS="3V8D 1ERE 3EML 1EVE 4DFR 3PJC 4MNE"
-METHODS="random imgep_naive imgep curiosity bo ga"
+METHODS="random imgep_naive imgep curiosity bo ga mapelites novelty nsga2"
 SEEDS="0 1 2 3 4 5 6 7 8 9"
 
 [ -n "$FILTER_TARGET" ] && TARGETS="$FILTER_TARGET"
