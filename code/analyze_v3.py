@@ -84,12 +84,34 @@ def load_results(target, method, seed):
 
 
 def compute_metrics(data):
-    """Compute all metrics for a single run."""
+    """Compute all metrics for a single run.
+
+    Note on behavior encoding: eight of the nine methods store the augmented
+    behavior vector φ = [ψ, q] where q = clip(-Vina/12, 0, 1) as the last
+    coordinate. NSGA-II stores only the interaction-only ψ (the augmented
+    coordinate is unused by its Pareto selection). To keep the PW Dist and
+    unique-profile metrics comparable across methods (both are reported on φ
+    in the paper's Table 2), we reconstruct φ for the ψ-only case by
+    appending q(m) to each stored ψ vector.
+    """
     discoveries = data['discoveries']
     n_res = data['n_pocket_residues']
     n_types = len(data['interaction_types'])
     dim = data['behavior_dim']
-    behaviors = [np.array(d['behavior']) for d in discoveries]
+    expected_phi_dim = 3 * n_res + 1
+    expected_psi_dim = 3 * n_res
+    raw_behaviors = [np.array(d['behavior']) for d in discoveries]
+
+    # Reconstruct φ from ψ + q(m) when the stored behavior is ψ-only.
+    if raw_behaviors and len(raw_behaviors[0]) == expected_psi_dim:
+        def _q(v):
+            return float(np.clip(-v / 12.0, 0.0, 1.0)) if v != 0 else 0.0
+        behaviors = [
+            np.concatenate([b, [_q(d['vina_score'])]])
+            for b, d in zip(raw_behaviors, discoveries)
+        ]
+    else:
+        behaviors = raw_behaviors
     n_iters = len(behaviors)
 
     # Final pairwise diversity
