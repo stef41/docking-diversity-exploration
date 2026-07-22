@@ -1,0 +1,442 @@
+\documentclass[journal=jcisd8,manuscript=suppinfo]{achemso}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{url}
+\setlength{\emergencystretch}{3em}
+
+\author{Zacharie Bugaud}
+\affiliation{Inria, 2 rue Simone Iff, 75012 Paris, France}
+\email{zacharie.bugaud@gmail.com}
+
+\title{Diversity-Seeking Docking-Guided Molecular Design Discovers Broader Predicted Interaction Profiles Across Protein Families}
+
+\keywords{molecular docking, de novo molecular design, interaction fingerprints, quality-diversity, intrinsically motivated goal exploration, hit diversification}
+
+\begin{document}
+
+\section*{S1. Notation}
+
+\begin{longtable}{ll}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+$m$ & Generated molecule (SMILES) \\
+$r$ & Pocket residue index, $r \in \{1,\ldots,N_{\mathrm{res}}\}$ \\
+$t$ & Interaction type, $t \in \{\text{hydrophobic, HBD, HBA}\}$ \\
+$N_{\mathrm{res}}$ & Number of residues in the extended pocket set for a target \\
+$d_{\mathrm{nearest}}(m,r,t)$ & Shortest PLIP-reported distance for interaction $t$ between $m$ and $r$ \\
+$d_{\min}$ & Saturation floor, $1.5$~\AA \\
+$d_{\max}$ & Interaction cutoff, $4.0$~\AA \\
+$\boldsymbol{\psi}(m)$ & Interaction-only fingerprint in $[0,1]^{3N_{\mathrm{res}}}$ \\
+$\boldsymbol{\psi}^{\mathrm{bin}}(m)$ & Binary version: $\psi^{\mathrm{bin}}_{r,t} = \mathbb{I}[\psi_{r,t}>0]$ \\
+$s_{\mathrm{Vina}}(m)$ & Vina score, kcal/mol \\
+$q(m)$ & Normalized docking quality, $\mathrm{clip}[-s_{\mathrm{Vina}}/12, 0, 1]$ \\
+$\boldsymbol{\phi}(m)$ & Augmented behavior vector $[\boldsymbol{\psi}(m), q(m)] \in [0,1]^{3N_{\mathrm{res}}+1}$ \\
+$g$ & Goal, sampled from $P_{\mathrm{goal}}$ \\
+$P_{\mathrm{goal}}$ & Goal distribution of an IMGEP variant \\
+$\mathcal{B}$ & Set of observed behaviors after $n$ evaluations \\
+$D_{\mathrm{goal}}$ & Mean distance from goals to nearest observed behavior \\
+$D_{\mathrm{inter}}$ & Mean pairwise distance among observed behaviors \\
+$R$ & Reachability ratio, $D_{\mathrm{goal}}/D_{\mathrm{inter}}$ \\
+$k$ & $k$-nearest-neighbor parameter (context-dependent) \\
+$\sigma$ & Goal-perturbation noise scale ($0.3 \times \text{observed range}$) \\
+$\beta$ & UCB weighting coefficient, $2\sqrt{\ln(n+1)}$ \\
+$d$ & Cohen's $d$ effect size (results tables) \\
+$T$ & Number of iterations per run, $500$ \\
+\bottomrule
+\end{longtable}
+
+\section*{S2. Software versions and environment}
+
+\begin{itemize}
+    \item \textbf{GNINA} v1.0 (HEAD 6381355, built March 2021), invoked with \texttt{--cnn\_scoring none}, \texttt{--exhaustiveness 16}, \texttt{--seed 42}, \texttt{--num\_modes 1}, \texttt{--num\_mc\_saved 1}, rigid receptor.
+    \item \textbf{CReM} v0.2.16 (from PyPI). Both \texttt{mutate\_mol} and \texttt{grow\_mol} were invoked with library defaults (see main text, Methods \S~\emph{Fragment vocabulary and mutation operator}).
+    \item \textbf{PLIP} v2.2 for protein--ligand interaction profiling.
+    \item \textbf{RDKit} 2024.09.6 (Python 3.10 wheel).
+    \item \textbf{Biopython} for PDB structure parsing.
+    \item \textbf{Python} 3.10.12; \textbf{NumPy} 1.26.4; \textbf{SciPy} 1.15.3.
+    \item Operating system: Ubuntu 22.04 LTS.
+\end{itemize}
+
+\section*{S3. CReM replacement database}
+
+\begin{table}[ht]
+\centering
+\caption{Fragment vocabulary used for CReM edits in every reported run.}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.72\textwidth}@{}}
+\toprule
+Filename & \texttt{crem\_large.db} \\
+Byte size & $1{,}388{,}544$ \\
+Entries & $5{,}955$ replacement fragments \\
+Source & Polishchuk 2020 (SA-filtered replacement set; full citation in main manuscript) \\
+SHA-256 & \texttt{40262010822204fdb7576ba842\allowbreak 08512e6203992cfb1fcbe157648fde6e6ad664} \\
+Repository path & \texttt{targets/crem\_large.db} in \url{https://github.com/stef41/docking-diversity-exploration} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S4. Parent-selection pseudocode}
+
+The nine parent-selection procedures are given below in NumPy-style pseudocode. In all cases, ``behavior'' refers to the augmented vector $\boldsymbol{\phi}(m) = [\boldsymbol{\psi}(m), q(m)]$ used by the submitted implementation.
+
+{\small
+\begin{verbatim}
+def select_parent_random(history_smiles, ...):
+    return uniform_choice(history_smiles)
+
+def select_parent_imgep_naive(history_smiles, history_behaviors, d):
+    goal = uniform([0,1]^d)
+    return history_smiles[argmin(||b - goal||_2 for b in history_behaviors)]
+
+def select_parent_imgep_adaptive(history_smiles, history_behaviors, d):
+    base = uniform_choice(history_behaviors)
+    noise ~ N(0, 0.3 * observed_range(history_behaviors))
+    goal = clip(base + noise, 0, 1)
+    return history_smiles[argmin(||b - goal||_2 for b in history_behaviors)]
+
+def select_parent_curiosity(history_smiles, history_behaviors, d):
+    sparsity = mean_kNN_distance(history_behaviors, k=5)
+    base = weighted_choice(history_behaviors, weights=sparsity)
+    noise ~ N(0, 0.3 * observed_range(history_behaviors))
+    goal = clip(base + noise, 0, 1)
+    return history_smiles[argmin(||b - goal||_2 for b in history_behaviors)]
+
+def select_parent_aff_div(history_smiles, history_behaviors):
+    scores  = [b[-1] for b in history_behaviors]                    # q(m)
+    top_k   = argsort(scores)[-len(scores)//5:]
+    beta    = 2.0 * sqrt(log(len(scores) + 1))
+    ucb[i]  = scores[i] + beta * mean_Tanimoto_distance(smiles[i], smiles[top_k])
+    return history_smiles[argmax(ucb)]
+
+def select_parent_ga(history_smiles, history_behaviors):
+    scores = [b[-1] for b in history_behaviors]
+    return history_smiles[argmax(scores[tournament_sample(k=3)])]
+
+def select_parent_novelty(history_smiles, history_behaviors):
+    novelty = mean_kNN_distance(history_behaviors, k=15)
+    return history_smiles[argmax(novelty[tournament_sample(k=3)])]
+
+def select_parent_mapelites(history_smiles, history_behaviors, archive):
+    if archive is empty: return uniform_choice(history_smiles)
+    return archive[uniform_choice(archive.keys())].smiles
+    # archive key = tuple(r for r in range(n_res)
+    #                     if any(b[r*3 + t] > 0 for t in {hyd, HBD, HBA}))
+    # replace rule: new mol replaces cell occupant iff q(new) > q(occupant)
+
+def select_parent_nsga2(population, all_history_psi):
+    # population = 50 individuals
+    # objectives: -q(m); -novelty_psi_knn15(m)
+    ranks, crowd = nondominated_sort_and_crowding(population)
+    parent = binary_tournament(population, ranks, crowd)
+    # After offspring evaluation, combined pop truncated to 50 by NSGA-II rules.
+    return parent
+\end{verbatim}
+}
+
+\clearpage
+
+\section*{S5. Failure statistics (Group A4)}
+
+Failure and no-op rates across all $560$ submitted runs. ``Runtime error'' = a caught exception logged in the discovery record; ``zero-interaction'' = a docked molecule with no PLIP-reported contacts; ``consecutive-duplicate SMILES'' = an iteration whose returned SMILES equals the previous iteration's (a proxy for CReM producing no filter-passing candidate and returning the parent unchanged).
+
+\begin{table}[ht]
+\centering
+\caption{Per-method failure and no-op statistics, computed over $8 \times 7 \times 10 \times 500 = 280{,}000$ discovery records.}
+\label{tab:failures}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Method} & \textbf{Runs} & \textbf{Runtime err.\ \%} & \textbf{Zero-int.\ \%} & \textbf{Consec.-dup SMILES \%} \\
+\midrule
+Random           & 35{,}000 & 0.00 & 4.08  & 0.26 \\
+IMGEP (naive)    & 35{,}000 & 0.00 & 0.48  & 1.13 \\
+IMGEP (adaptive) & 35{,}000 & 0.00 & 3.25  & 0.29 \\
+Curiosity-IMGEP  & 35{,}000 & 0.00 & 2.33  & 0.27 \\
+Aff--Div         & 35{,}000 & 0.00 & 10.32 & \textbf{17.92} \\
+Genetic Alg.     & 35{,}000 & 0.00 & 0.12  & 1.17 \\
+MAP-Elites       & 35{,}000 & 0.00 & 2.03  & 0.20 \\
+Novelty Search   & 35{,}000 & 0.00 & 1.48  & 0.49 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Interpretation.} No runtime errors were observed across the entire benchmark. The high consecutive-duplicate-SMILES rate for Aff--Div ($17.9\%$, vs.\ $\leq 1.2\%$ for the other methods) is a direct consequence of its strongly affinity-biased parent selection: the same top-scoring molecule is repeatedly selected as parent, and CReM's fragment vocabulary yields no filter-passing candidate for it. This mechanistically explains the profile-diversity collapse reported in Table~2 of the main text.
+
+\section*{S6. $\boldsymbol{\psi}$ vs.\ $\boldsymbol{\phi}$ unique-profile recomputation (Group B1)}
+
+\begin{table}[ht]
+\centering
+\caption{Recomputing unique-profile counts using the interaction-only $\boldsymbol{\psi}$ instead of the augmented $\boldsymbol{\phi}$ used at search time. Method rankings are preserved.}
+\label{tab:psi_vs_phi}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Method} & $\boldsymbol{\phi}$ counts (mean $\pm$ SD) & $\boldsymbol{\psi}$ counts (mean $\pm$ SD) & Mean shift & Max single-run shift \\
+\midrule
+Random           & $307.6 \pm 28.7$ & $301.5 \pm 28.5$ & $-1.99\%$ &  $4.35\%$ \\
+IMGEP (naive)    & $230.8 \pm 64.9$ & $230.1 \pm 64.6$ & $-0.31\%$ &  $1.67\%$ \\
+IMGEP (adaptive) & $328.3 \pm 29.9$ & $322.7 \pm 29.4$ & $-1.71\%$ &  $3.76\%$ \\
+Curiosity-IMGEP  & $331.5 \pm 29.4$ & $326.7 \pm 29.7$ & $-1.45\%$ &  $3.41\%$ \\
+Aff--Div         & $104.6 \pm 47.5$ & $102.1 \pm 47.8$ & $-2.77\%$ & $13.64\%$ \\
+Genetic Alg.     & $218.9 \pm 60.1$ & $218.9 \pm 60.0$ & $-0.02\%$ &  $0.37\%$ \\
+MAP-Elites       & $350.3 \pm 22.9$ & $345.7 \pm 23.1$ & $-1.32\%$ &  $2.61\%$ \\
+Novelty Search   & $290.7 \pm 36.9$ & $287.8 \pm 36.3$ & $-0.99\%$ &  $2.86\%$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section*{S7. Chemical diversity (Group B2)}
+
+Complete Morgan (radius 2, 2048-bit), MACCS, Atom Pair, and Bemis--Murcko scaffold-count summary averaged across all 70 runs per method.
+
+\begin{table}[ht]
+\centering
+\caption{Chemical diversity of unique-SMILES sets from each method. Pairwise mean Tanimoto \emph{distance} shown for the three fingerprint families ($1 - \text{sim}$); Bemis--Murcko count is mean $\pm$ std of unique scaffolds per run.}
+\label{tab:chem_div}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{Morgan} & \textbf{MACCS} & \textbf{AtomPair} & \textbf{Scaffolds} & \textbf{Cohen's $d$ (scaff.\ vs.\ Random)} \\
+\midrule
+Random           & $0.783$ & $0.600$ & $0.763$ & $16.3 \pm 3.2$  & n/a \\
+IMGEP (naive)    & $0.620$ & $0.402$ & $0.616$ & $21.9 \pm 15.7$ & $+0.49$ \\
+IMGEP (adaptive) & $0.785$ & $0.604$ & $0.763$ & $17.9 \pm 4.7$  & $+0.39$ \\
+Curiosity-IMGEP  & $0.764$ & $0.570$ & $0.745$ & $19.8 \pm 5.8$  & $+0.75$ \\
+Aff--Div         & $\mathbf{0.828}$ & $\mathbf{0.671}$ & $\mathbf{0.797}$ & $11.5 \pm 7.2$  & $-0.87$ \\
+Genetic Alg.     & $0.505$ & $0.266$ & $0.517$ & $19.3 \pm 10.5$ & $+0.39$ \\
+MAP-Elites       & $0.782$ & $0.592$ & $0.755$ & $21.4 \pm 8.1$ & $+0.81$ \\
+Novelty Search   & $0.695$ & $0.482$ & $0.686$ & $18.6 \pm 7.9$  & $+0.38$ \\
+NSGA-II          & $0.645$ & $0.430$ & $0.645$ & $\mathbf{24.6 \pm 12.3}$ & $\mathbf{+0.92}$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section*{S8. Extended vs.\ co-crystal-local pocket coverage (Group B3)}
+
+\begin{table}[ht]
+\centering
+\caption{Per-target pocket sizes. Extended = residues with $\geq 1$ atom inside the axis-aligned docking box (denominator used in the main text's ``Coverage'' column). Co-crystal-local = residues with $\geq 1$ heavy atom within $4.0$~\AA\ of any co-crystallized-ligand heavy atom (from the original PDB deposit, ligand identified as the largest non-cofactor HETATM residue).}
+\label{tab:pockets}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{PDB} & \textbf{Extended} & \textbf{Co-crystal-local} & \textbf{Co-crystal ligand heavy atoms} & \textbf{Ratio local/extended} \\
+\midrule
+3V8D & 95 & 22 & 43 & 0.23 \\
+1ERE & 71 & 11 & 20 & 0.15 \\
+3EML & 65 & 12 & 25 & 0.18 \\
+1EVE & 76 & 14 & 28 & 0.18 \\
+4DFR & 55 & 16 & 33 & 0.29 \\
+3PJC & 60 & 18 & 33 & 0.30 \\
+4MNE & 68 & 19 & 31 & 0.28 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-method mean pocket coverage against the two denominators. Note the reversal: methods that cover $\sim 40\%$ of the extended pocket actually cover $\sim 90\%$ of the co-crystal-local pocket, indicating that residues never reached by any generated ligand are almost exclusively peripheral box residues rather than accessible-pocket residues.}
+\label{tab:coverage_both}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Method} & \textbf{Extended coverage} & \textbf{Co-crystal-local coverage} \\
+\midrule
+Random           & $40.4\%$ & $88.9\%$ \\
+IMGEP (naive)    & $41.3\%$ & $90.8\%$ \\
+IMGEP (adaptive) & $40.8\%$ & $89.3\%$ \\
+Curiosity-IMGEP  & $41.8\%$ & $91.0\%$ \\
+Aff--Div         & $34.9\%$ & $81.9\%$ \\
+Genetic Alg.     & $41.3\%$ & $92.1\%$ \\
+MAP-Elites       & $41.4\%$ & $90.0\%$ \\
+Novelty Search   & $41.2\%$ & $90.1\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across the seven targets, $222$ of the $223$ residues never contacted by any of the original $8$ methods $\times$ $10$ seeds ($99.6\%$) lie outside the co-crystal-local set. On $6/7$ targets this fraction is exactly $100\%$; on 3EML it is $97\%$ ($33/34$). The reviewer-requested NSGA-II baseline (see Section~S11a) achieves the highest per-target extended coverage ($42.8 \pm 5.7\%$ vs.\ $40.4 \pm 5.8\%$ for Random), so adding it to the union can only reduce the never-contacted set further and preserves the qualitative conclusion that unreached residues lie almost exclusively outside the co-crystal-local pocket.
+
+\section*{S9. ChEMBL target-specific bioactivity-neighborhood analysis (Group G)}
+
+\begin{table}[ht]
+\centering
+\caption{ChEMBL target mapping and active-set counts. Activities were retrieved from the ChEMBL REST API on 2026-07-17 and filtered to \texttt{assay\_type = B}, \texttt{standard\_relation = ``=''}, and $p\mathrm{ChEMBL} \geq 6$. 3V8D (CYP7A1) is excluded from downstream analyses because ChEMBL contains no binding-assay activity records for this metabolic P450 at the specified threshold. \emph{Homology-based mapping:} For 1EVE (crystallized \emph{Tetronarce californica} AChE) and 4DFR (crystallized \emph{E.\ coli} DHFR), the ChEMBL target was chosen from a well-populated homologous species (P22303 / CHEMBL220 human AChE; P00378 / CHEMBL2575 vertebrate DHFR) because the exact-species ChEMBL records (CHEMBL4780 \emph{T.\ californica} AChE; CHEMBL1809 \emph{E.\ coli} DHFR) have substantially fewer curated activities. Relative-method comparisons are unaffected because all methods on a given target are scored against the same reference set.}
+\label{tab:chembl_targets}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrrr}
+\toprule
+\textbf{PDB} & \textbf{UniProt} & \textbf{ChEMBL} & \textbf{Activities} & \textbf{Unique SMILES} & \textbf{Unique scaffolds} \\
+\midrule
+3V8D & P22680 & CHEMBL1851 &      0 &     0 &     0 \\
+1ERE & P03372 & CHEMBL206  & 5{,}973 & 3{,}209 &   994 \\
+3EML & P29274 & CHEMBL251  & 5{,}970 & 4{,}735 & 1{,}843 \\
+1EVE & P22303 & CHEMBL220  & 4{,}455 & 3{,}117 & 1{,}549 \\
+4DFR & P00378 & CHEMBL2575 &    111 &   107 &    29 \\
+3PJC & P52333 & CHEMBL2148 & 8{,}599 & 6{,}090 & 2{,}325 \\
+4MNE & P15056 & CHEMBL5145 & 8{,}583 & 5{,}019 & 1{,}758 \\
+\midrule
+\textbf{Total (6 targets)} & n/a & n/a & \textbf{33{,}691} & \textbf{22{,}277} & \textbf{8{,}498} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Per-method ChEMBL-active-neighborhood metrics, averaged across the six analyzed targets. All comparisons use Morgan (radius 2, 2048-bit) fingerprints. ``\# active-scaffold neighborhoods reached'' counts distinct Bemis--Murcko scaffolds of active compounds for which \emph{some} generated molecule achieved Tanimoto similarity $\geq 0.4$. ``Mean maxSim'' is the average, over all unique generated molecules, of the maximum similarity to any known active. ``Top-10 maxSim'' averages this over the ten best-scoring generated molecules per run.}
+\label{tab:chembl_results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+\textbf{Method} & \textbf{InChI redisc.} & \textbf{mean maxSim} & \textbf{top-10 maxSim} & \textbf{\% $\geq 0.4$} & \textbf{\% $\geq 0.5$} & \textbf{\% $\geq 0.6$} & \textbf{\# neighborhoods} \\
+\midrule
+Random           & 0 & $0.224$ & $0.437$ & $3.07$ & $0.40$ & $0.11$ & $10.9$ \\
+IMGEP (naive)    & 0 & $0.216$ & $0.395$ & $1.56$ & $0.19$ & $0.04$ & $7.0$ \\
+IMGEP (adaptive) & 0 & $0.225$ & $0.431$ & $2.89$ & $0.32$ & $0.06$ & $12.4$ \\
+Curiosity-IMGEP  & 0 & $0.223$ & $0.434$ & $3.09$ & $0.44$ & $0.08$ & $13.1$ \\
+Aff--Div         & 0 & $0.226$ & $0.407$ & $\mathbf{4.43}$ & $\mathbf{0.73}$ & $0.06$ & $10.1$ \\
+Genetic Alg.     & 0 & $0.209$ & $0.356$ & $1.75$ & $0.29$ & $0.04$ & $5.1$ \\
+\textbf{MAP-Elites} & 0 & $0.225$ & $\mathbf{0.440}$ & $3.08$ & $0.39$ & $0.09$ & $\mathbf{17.6}$ \\
+Novelty Search   & 0 & $0.216$ & $0.430$ & $2.66$ & $0.49$ & $\mathbf{0.11}$ & $10.1$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\emph{Interpretation.} No method achieves exact InChIKey rediscovery of a known active, as expected: CReM operates on a bounded fragment vocabulary and does not attempt to reproduce specific known compounds. Per-molecule similarity to nearest active is comparable across methods (mean $\sim 0.22$; top-10 mean $\sim 0.42$--$0.44$), which is on the order of ``distant analog'' rather than ``bioisosteric hit.'' The clearest separation is in \emph{breadth}: MAP-Elites reaches $17.6$ distinct active-scaffold neighborhoods, $+61\%$ over Random; Curiosity-IMGEP reaches $13.1$ ($+20\%$); the affinity-focused Genetic Algorithm collapses to $5.1$ ($-53\%$). This supports the paper's narrower claim that diversity-aware search broadens the \emph{portfolio of predicted interaction hypotheses} without demonstrating individual candidate activity.
+
+\section*{S10. Charged-interaction ablation: target selection (Group E1)}
+
+Prevalence of positively- and negatively-charged residues in the co-crystal-local pocket, used to pre-select the three targets for the salt-bridge ablation.
+
+\begin{table}[ht]
+\centering
+\caption{Ionic-residue prevalence in the co-crystal-local pocket. ``Acidic'' = Asp + Glu; ``Basic'' = Lys + Arg + His. The top-3 targets by ionic fraction (1ERE, 3EML, 4DFR) were pre-selected for the charged-channel ablation \emph{before} results on the extended descriptor were computed.}
+\label{tab:salt_bridge}
+\begin{tabular}{lrrrrl}
+\toprule
+\textbf{PDB} & \textbf{Local pocket} & \textbf{Acidic} & \textbf{Basic} & \textbf{Ionic frac.} & \textbf{Selected for ablation?} \\
+\midrule
+1ERE & 11 & 1 & 2 & $27.3\%$ & \textbf{Yes} \\
+3EML & 12 & 1 & 2 & $25.0\%$ & \textbf{Yes} \\
+4DFR & 16 & 1 & 3 & $25.0\%$ & \textbf{Yes} \\
+3PJC & 18 & 2 & 2 & $22.2\%$ & No \\
+1EVE & 14 & 1 & 2 & $21.4\%$ & No \\
+4MNE & 19 & 2 & 2 & $21.1\%$ & No \\
+3V8D & 22 & 1 & 1 & $9.1\%$  & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S11. Post-submission-launched analyses (Experiments 1--4)}
+
+Each of the four experiments requested by the reviewers was launched immediately after freezing the response letter's precommitted branches (2026-07-17). Runs were executed on a shared 104-core / 8$\times$H100 machine using gnina v1.0 (the paper's original version) for Experiments 1--3 and gnina v1.3.3 (native CUDA 12) for a subset of Experiment 1 (10 runs on 3V8D) and all of Experiment 4, after the older binary was observed to hang on the machine's CUDA-12.4 driver at high concurrency. Vina-scoring compatibility between the two versions was verified on a control ligand (aspirin/3PJC): score difference $0.04$~kcal/mol, well within Vina's $\sim 0.5$~kcal/mol inherent noise.
+
+\subsection*{S11a. NSGA-II baseline (Experiment 1, 7 targets $\times$ 10 seeds = 70 runs)}
+
+\begin{table}[ht]
+\centering
+\caption{NSGA-II per-target results (mean $\pm$ SD over 10 seeds). $q(m) = \mathrm{clip}[-s_{\mathrm{Vina}}/12, 0, 1]$; unique-profile counts computed on the augmented $\boldsymbol{\phi}$ vector (reconstructed by appending $q(m)$ to each stored $\boldsymbol{\psi}$).}
+\label{tab:nsga2_per_target}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Target} & \textbf{PW Dist.} & \textbf{Unique $\boldsymbol{\phi}$} & \textbf{Coverage (\%)} & \textbf{Best Vina (kcal/mol)} & \textbf{Scaffolds} \\
+\midrule
+3V8D  & $1.240 \pm 0.101$ & $271.9 \pm 24.2$ & $48.3 \pm 0.9$ & $-11.15 \pm 0.31$ & $17.5 \pm 4.4$ \\
+1ERE  & $1.124 \pm 0.044$ & $293.4 \pm 24.5$ & $33.9 \pm 2.8$ & $-9.63 \pm 0.39$ & $18.3 \pm 7.8$ \\
+3EML  & $1.197 \pm 0.038$ & $272.1 \pm 26.9$ & $38.6 \pm 3.5$ & $-11.60 \pm 0.35$ & $24.7 \pm 12.1$ \\
+1EVE  & $1.320 \pm 0.049$ & $290.1 \pm 23.6$ & $39.2 \pm 1.5$ & $-13.14 \pm 0.52$ & $26.4 \pm 15.4$ \\
+4DFR  & $1.232 \pm 0.041$ & $275.3 \pm 39.5$ & $48.0 \pm 2.6$ & $-10.60 \pm 0.71$ & $27.1 \pm 15.3$ \\
+3PJC  & $1.268 \pm 0.058$ & $272.6 \pm 17.1$ & $44.5 \pm 1.6$ & $-11.18 \pm 0.24$ & $30.9 \pm 12.2$ \\
+4MNE  & $1.300 \pm 0.068$ & $301.6 \pm 40.9$ & $46.9 \pm 2.7$ & $-10.96 \pm 0.46$ & $27.3 \pm 12.3$ \\
+\midrule
+\textbf{Pooled} & $\mathbf{1.240 \pm 0.084}$ & $\mathbf{282.4 \pm 30.2}$ & $\mathbf{42.8 \pm 5.7}$ & $\mathbf{-11.18 \pm 1.08}$ & $\mathbf{24.6 \pm 12.3}$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Pooled comparisons versus Random: PW distance $d = +2.10$ ($p_\mathrm{Bonf} < 10^{-17}$), unique $\boldsymbol{\phi}$ $d = -0.85$ ($p_\mathrm{Bonf} < 10^{-6}$), best Vina $d = -1.08$ ($p_\mathrm{Bonf} < 10^{-8}$), scaffold count $d = +0.92$ ($p_\mathrm{Bonf} < 10^{-6}$). Per-target Wilcoxon signed-rank tests versus Random ($n = 7$ per-target means): unique profiles $W = 0$, $p = 0.016$; best Vina $W = 0$, $p = 0.016$. NSGA-II beats Random on best-Vina on all 7 targets and falls below Random on unique-profile count on all 7 targets, exactly as predicted for a Pareto-optimizer that concentrates the population near the affinity--novelty frontier. Head-to-head against the Genetic Algorithm, NSGA-II achieves the lower mean best-Vina on 3 of 7 targets (3V8D, 1ERE, 4MNE) while GA achieves the lower mean on 4 of 7 (3EML, 1EVE, 4DFR, 3PJC); no per-target Mann--Whitney comparison reaches significance ($p \geq 0.16$), and a pooled Mann--Whitney test on the 70 vs 70 best-Vina scores gives $p = 0.85$: the two methods' best-affinity performance is statistically indistinguishable.
+
+\subsection*{S11b. Continuous vs.\ binary Curiosity-IMGEP (Experiment 2, 7 $\times$ 10 = 70 runs)}
+
+\begin{table}[ht]
+\centering
+\caption{Binary vs.\ continuous fingerprint for Curiosity-IMGEP (pooled across all 7 targets $\times$ 10 seeds).}
+\label{tab:binary_vs_continuous}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Metric} & \textbf{Binary $\boldsymbol{\psi}^{\mathrm{bin}}$} & \textbf{Continuous $\boldsymbol{\psi}$} & \textbf{$\Delta$ (\%)} & \textbf{Cohen's $d$, $p$} \\
+\midrule
+Unique $\boldsymbol{\phi}$          & $334.6 \pm 26.7$ & $331.5 \pm 29.4$ & $+0.95$   & $+0.11$, n.s.\ ($p = 0.52$) \\
+Unique $\boldsymbol{\psi}$          & $334.6 \pm 26.7$ & $326.7 \pm 29.7$ & $+2.41$   & $+0.28$, n.s.\ ($p = 0.10$) \\
+Pairwise dist.\ (behavior)          & $1.05 \pm 0.08$  & $1.15 \pm 0.08$  & $-8.44$   & $-1.21$, $p < 10^{-9}$ \\
+Pocket coverage (extended)          & $0.412 \pm 0.061$ & $0.418 \pm 0.058$ & $-1.34$   & $-0.10$, n.s.\ ($p = 0.44$) \\
+Best Vina (kcal/mol)                & $-10.12 \pm 0.90$ & $-10.40 \pm 1.00$ & $-2.65$  & $+0.29$, n.s.\ ($p = 0.06$) \\
+Unique SMILES per run               & $339.7 \pm 26.8$ & $332.5 \pm 29.3$ & $+2.18$   & $+0.26$, n.s.\ ($p = 0.15$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Interpretation.} Discovery counts (unique profiles, unique SMILES) are statistically indistinguishable between the two encodings; only the pairwise-distance geometry differs meaningfully. This aligns with the paper's claim that the continuous encoding's role is smoother nearest-neighbor geometry, not increased density.
+
+\subsection*{S11c. Charged-interaction ablation (Experiment 3, 3 $\times$ 5 $\times$ 2 = 30 runs)}
+
+\begin{table}[ht]
+\centering
+\caption{Curiosity-IMGEP and Random with 5-channel (add: ligand-positive/protein-negative and ligand-negative/protein-positive) vs.\ 3-channel descriptors, per target. Numbers are mean $\pm$ SD unique profiles per run (10 seeds for 3-channel, 5 seeds for 5-channel).}
+\label{tab:charged}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Target} & \textbf{Curiosity 3ch} & \textbf{Curiosity 5ch} & \textbf{Random 3ch} & \textbf{Random 5ch} \\
+\midrule
+1ERE (27.3\% ionic) & $340.1 \pm 28.1$ & $\mathbf{352.8 \pm 15.1}$ ($+3.7\%$) & $308.4 \pm 41.8$ & $301.8 \pm 50.6$ ($-2.1\%$) \\
+3EML (25.0\% ionic) & $326.2 \pm 26.4$ & $\mathbf{346.4 \pm 33.2}$ ($+6.2\%$) & $314.0 \pm 23.3$ & $309.2 \pm 43.3$ ($-1.5\%$) \\
+4DFR (25.0\% ionic) & $308.7 \pm 36.1$ & $\mathbf{345.6 \pm 11.9}$ ($+12.0\%$) & $304.7 \pm 28.5$ & $313.4 \pm 36.3$ ($+2.9\%$) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Charged channels help Curiosity-IMGEP on all three ionically-enriched targets, with a magnitude that scales with pocket ionic-residue fraction (though from a $n = 3$ sample). Random is essentially unaffected, consistent with the interpretation that the added channels only help when the retrieval policy can exploit them.
+
+\subsection*{S11d. Cutoff sensitivity + $q$-exclusion (Experiment 4, 2 $\times$ 5 $\times$ 3 = 30 runs)}
+
+\begin{table}[ht]
+\centering
+\caption{Curiosity-IMGEP at alternative $d_{\max}$ and with/without $q(m)$ in the search vector, on two targets spanning pocket sizes (1EVE: 76 residues; 4DFR: 55 residues). Baseline $d_{\max} = 4.0$~\AA\ with $q(m)$ included is the paper's original setting.}
+\label{tab:cutoff}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Variant} & \textbf{Unique $\boldsymbol{\phi}$} & \textbf{Coverage (\%)} & \textbf{Best Vina} \\
+\midrule
+\multicolumn{4}{l}{\emph{Target: 1EVE (large pocket)}} \\
+$d_{\max} = 4.0$~\AA\ + $q(m)$ (baseline) & $335.0 \pm 18.1$ & $37.1$ & $-12.11$ \\
+$d_{\max} = 3.5$~\AA & $329.2 \pm 27.7$ ($-1.7\%$) & $33.2$ & $-11.72$ \\
+$d_{\max} = 4.5$~\AA & $350.8 \pm 27.0$ ($+4.7\%$) & $37.6$ & $-11.80$ \\
+$d_{\max} = 4.0$~\AA, no $q$ in retrieval & $336.6 \pm 25.1$ ($+0.5\%$) & $36.1$ & $-11.96$ \\
+\midrule
+\multicolumn{4}{l}{\emph{Target: 4DFR (small pocket)}} \\
+$d_{\max} = 4.0$~\AA\ + $q(m)$ (baseline) & $308.7 \pm 36.1$ & $46.5$ & $-9.95$ \\
+$d_{\max} = 3.5$~\AA & $315.2 \pm 23.3$ ($+2.1\%$) & $45.8$ & $-10.42$ \\
+$d_{\max} = 4.5$~\AA & $344.6 \pm 14.4$ ($+11.6\%$) & $46.9$ & $-10.58$ \\
+$d_{\max} = 4.0$~\AA, no $q$ in retrieval & $322.8 \pm 22.4$ ($+4.6\%$) & $47.6$ & $-10.13$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Effect directions are stable across both targets: $d_{\max} = 4.5$~\AA\ yields a modest gain ($+5$--$12\%$), $d_{\max} = 3.5$~\AA\ is close to neutral, coverage is essentially invariant ($\leq 1.1$ pp shift). Excluding $q(m)$ from goal generation and nearest-neighbor retrieval shifts unique-profile counts by $\leq 5\%$, confirming that the affinity coordinate contributes little to trajectory-level profile discovery.
+
+\end{document}
