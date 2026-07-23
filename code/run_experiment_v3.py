@@ -246,10 +246,19 @@ def get_all_interactions(pdb_string):
             pass
 
     for info in getattr(report, 'hbond_info', []):
+        # PLIP hbond_info tuple layout (v2.2.x):
+        #   0=RESNR, 1=RESTYPE, 2=RESCHAIN, 3=RESNR_LIG, 4=RESTYPE_LIG,
+        #   5=RESCHAIN_LIG, 6=SIDECHAIN, 7=DIST_H-A, 8=DIST_D-A,
+        #   9=DON_ANGLE, 10=PROTISDON, 11=DONORIDX, 12=DONORTYPE,
+        #   13=ACCEPTORIDX, 14=ACCEPTORTYPE, 15=LIGCOO, 16=PROTCOO.
+        # dist uses the H-A distance (index 7); is_prot_donor uses PROTISDON
+        # (index 10). Prior versions read index 6 (SIDECHAIN) as PROTISDON;
+        # results archived before this fix therefore split the two hbond
+        # channels by sidechain-vs-backbone rather than donor-vs-acceptor.
         try:
             resnr = int(info[0])
             dist = float(info[7])
-            is_prot_donor = (info[6] is True or info[6] == 'True')
+            is_prot_donor = (info[10] is True or info[10] == 'True')
             itype = 'hbond_donor' if is_prot_donor else 'hbond_acceptor'
             if resnr not in residue_interactions:
                 residue_interactions[resnr] = {t: [] for t in INTERACTION_TYPES}
@@ -318,22 +327,27 @@ def mutate_smiles(smiles):
         return smiles
     mol_h = Chem.AddHs(mol)
 
+    # Cap the accumulated candidate list at MAX_CANDIDATES filter-passing
+    # entries. Check the cap BEFORE appending so we do not exceed it on the
+    # second (mutate_mol) generator's first iteration when grow_mol already
+    # filled the list.
+    MAX_CANDIDATES = 15
     candidates = []
     for db in CREM_DBS:
         try:
             for smi in grow_mol(mol_h, db_name=db):
+                if len(candidates) >= MAX_CANDIDATES:
+                    break
                 if lipinski_ok(smi):
                     candidates.append(smi)
-                if len(candidates) >= 15:
-                    break
         except Exception:
             pass
         try:
             for smi in mutate_mol(mol_h, db_name=db):
+                if len(candidates) >= MAX_CANDIDATES:
+                    break
                 if lipinski_ok(smi):
                     candidates.append(smi)
-                if len(candidates) >= 15:
-                    break
         except Exception:
             pass
         if len(candidates) >= 10:
@@ -380,14 +394,22 @@ def select_parent_imgep(history_smiles, history_behaviors, dim=None, **kw):
 
 
 def select_parent_curiosity(history_smiles, history_behaviors, dim=None, **kw):
-    """Curiosity-IMGEP: sparsity-biased goal sampling."""
+    """Curiosity-IMGEP: sparsity-biased goal sampling.
+
+    Uses k=5 non-self nearest neighbors for the sparsity score. KDTree.query
+    treats each history point as its own nearest neighbor at distance 0, so we
+    request k+1 neighbors and drop the first (self) column.
+    """
     from scipy.spatial import KDTree
     bmat = np.array(history_behaviors)
     tree = KDTree(bmat)
-    k = min(5, len(history_behaviors))
-    dists_knn, _ = tree.query(history_behaviors, k=k)
-    if len(dists_knn.shape) == 1:
+    K_NN = 5
+    k_query = min(K_NN + 1, len(history_behaviors))
+    dists_knn, _ = tree.query(history_behaviors, k=k_query)
+    if dists_knn.ndim == 1:
         dists_knn = dists_knn.reshape(-1, 1)
+    # Drop the self column (first column of the kNN result).
+    dists_knn = dists_knn[:, 1:] if dists_knn.shape[1] > 1 else dists_knn
     sparsity = np.mean(dists_knn, axis=1)
     if np.sum(sparsity) > 0:
         probs = sparsity / np.sum(sparsity)
@@ -459,17 +481,22 @@ def select_parent_mapelites(history_smiles, history_behaviors, dim=None,
 def select_parent_novelty(history_smiles, history_behaviors, dim=None, **kw):
     """Novelty search: tournament selection on novelty score.
 
-    Novelty = mean distance to k nearest neighbors in behavior space.
-    Uses tournament selection (k=3) on novelty scores, mirroring how
-    Lehman & Stanley (2011) use novelty as the fitness in an EA.
+    Novelty = mean distance to k=15 non-self nearest neighbors in behavior
+    space. KDTree.query treats each history point as its own nearest neighbor
+    at distance 0, so we request k+1 neighbors and drop the first (self)
+    column. Tournament selection (size 3) on novelty scores mirrors how
+    Lehman & Stanley (2011) use novelty as the EA fitness.
     """
     from scipy.spatial import KDTree
     bmat = np.array(history_behaviors)
-    k = min(15, len(history_behaviors))
+    K_NN = 15
+    k_query = min(K_NN + 1, len(history_behaviors))
     tree = KDTree(bmat)
-    dists_knn, _ = tree.query(bmat, k=k)
-    if len(dists_knn.shape) == 1:
+    dists_knn, _ = tree.query(bmat, k=k_query)
+    if dists_knn.ndim == 1:
         dists_knn = dists_knn.reshape(-1, 1)
+    # Drop the self column (first column of the kNN result).
+    dists_knn = dists_knn[:, 1:] if dists_knn.shape[1] > 1 else dists_knn
     novelty = np.mean(dists_knn, axis=1)
     # Tournament selection (k=3) on novelty, matching GA's tournament
     n = len(history_smiles)

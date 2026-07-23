@@ -14,7 +14,8 @@ set -e
 cd "$(dirname "$0")/.."  # cd to repo root
 
 PYTHON="${PYTHON:-python3}"
-SCRIPT="code/run_experiment_v3.py"
+DEFAULT_SCRIPT="code/run_experiment_v3.py"
+NSGA2_SCRIPT="code/nsga2_experiment.py"
 RESULTS="results"
 ITERS=500
 MAX_PARALLEL=20
@@ -42,38 +43,57 @@ mkdir -p "$RESULTS"
 
 TOTAL=0
 SKIPPED=0
+FAILED=0
 RUNNING=0
 PIDS=()
+declare -A PID_TAG   # PID -> "target/method/seed" for failure reporting
 
 run_one() {
     local target=$1 method=$2 seed=$3
     local outdir="${RESULTS}/${target}/${method}_seed${seed}"
-    
+
     if [ -f "${outdir}/results.json" ]; then
         SKIPPED=$((SKIPPED + 1))
         return
     fi
-    
+
     mkdir -p "$outdir"
     TOTAL=$((TOTAL + 1))
-    
+
+    # Dispatch to the correct runner. NSGA-II uses a dedicated script because
+    # it maintains a persistent population across iterations, unlike the
+    # single-parent select-then-mutate methods in run_experiment_v3.py.
+    local script
+    if [ "$method" = "nsga2" ]; then
+        script="$NSGA2_SCRIPT"
+        args=(--target "$target" --seed "$seed" --iterations "$ITERS" --output_dir "$outdir")
+    else
+        script="$DEFAULT_SCRIPT"
+        args=(--method "$method" --seed "$seed" --iterations "$ITERS" --target "$target" --output_dir "$outdir")
+    fi
+
     echo "[$(date +%H:%M:%S)] START ${target}/${method}/s${seed} (#${TOTAL})"
-    
-    $PYTHON $SCRIPT \
-        --method "$method" --seed "$seed" --iterations "$ITERS" \
-        --target "$target" --output_dir "$outdir" \
+
+    $PYTHON "$script" "${args[@]}" \
         > "${outdir}/stdout.log" 2>&1 &
-    
-    PIDS+=($!)
+
+    local pid=$!
+    PIDS+=($pid)
+    PID_TAG[$pid]="${target}/${method}/s${seed}"
     RUNNING=$((RUNNING + 1))
-    
+
     # Wait if we hit the parallel limit
     while [ $RUNNING -ge $MAX_PARALLEL ]; do
         # Wait for any child to finish
         for i in "${!PIDS[@]}"; do
             if ! kill -0 "${PIDS[$i]}" 2>/dev/null; then
-                wait "${PIDS[$i]}" 2>/dev/null || true
+                local dead=${PIDS[$i]}
+                if ! wait "$dead" 2>/dev/null; then
+                    FAILED=$((FAILED + 1))
+                    echo "[$(date +%H:%M:%S)] FAIL ${PID_TAG[$dead]}"
+                fi
                 unset 'PIDS[i]'
+                unset 'PID_TAG[$dead]'
                 RUNNING=$((RUNNING - 1))
             fi
         done
@@ -107,13 +127,20 @@ done
 # Wait for remaining
 echo "[$(date +%H:%M:%S)] Waiting for remaining ${RUNNING} jobs..."
 for pid in "${PIDS[@]}"; do
-    wait "$pid" 2>/dev/null || true
+    if ! wait "$pid" 2>/dev/null; then
+        FAILED=$((FAILED + 1))
+        echo "[$(date +%H:%M:%S)] FAIL ${PID_TAG[$pid]}"
+    fi
 done
 
 END_TIME=$(date +%s)
 ELAPSED=$((END_TIME - START_TIME))
 
 echo "============================================================"
-echo "  DONE: ${TOTAL} runs launched, ${SKIPPED} skipped (already done)"
+echo "  DONE: ${TOTAL} runs launched, ${SKIPPED} skipped (already done), ${FAILED} failed"
 echo "  Total wall time: $((ELAPSED / 3600))h $((ELAPSED % 3600 / 60))m"
 echo "============================================================"
+
+if [ $FAILED -gt 0 ]; then
+    exit 1
+fi

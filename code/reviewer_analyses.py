@@ -51,8 +51,25 @@ def load_run(target, method, seed):
 
 
 def compute_metrics(run):
-    """Compute all metrics for a single run."""
+    """Compute all metrics for a single run.
+
+    Note on behavior encoding: eight of the nine methods store the augmented
+    behavior vector φ = [ψ, q] where q = clip(-Vina/12, 0, 1) as the last
+    coordinate (behavior_dim = 3 N_res + 1). NSGA-II stores only the
+    interaction-only ψ (behavior_dim = 3 N_res); the augmented coordinate is
+    unused by its Pareto selection. To keep PW Dist and unique-profile metrics
+    comparable across methods (both are reported on φ in the paper's Table 2),
+    we reconstruct φ for the ψ-only case by appending q(m) computed from the
+    stored vina_score.
+    """
     discoveries = run["discoveries"]
+    n_res = run.get("n_pocket_residues")
+    if n_res is None:
+        # Older records may lack n_pocket_residues; derive it below.
+        n_res = 0
+    expected_phi_dim = 3 * n_res + 1 if n_res else None
+    expected_psi_dim = 3 * n_res if n_res else None
+
     behaviors = []
     smiles_list = []
     vina_scores = []
@@ -64,15 +81,25 @@ def compute_metrics(run):
         if b is None or "error" in d:
             n_failed += 1
             continue
-        behaviors.append(b)
+        vina = d.get("vina_score", 0)
+        b_arr = np.asarray(b, dtype=np.float64)
+        # Schema check: if the stored vector is ψ-only (3 N_res) rather than
+        # φ = [ψ, q] (3 N_res + 1), reconstruct φ so downstream metrics are
+        # cross-method comparable.
+        if expected_phi_dim is not None and b_arr.shape[0] == expected_psi_dim:
+            q_recon = float(np.clip(-vina / 12.0, 0.0, 1.0)) if vina != 0 else 0.0
+            b_arr = np.concatenate([b_arr, [q_recon]])
+        behaviors.append(b_arr)
         smiles_list.append(d["smiles"])
-        vina_scores.append(d.get("vina_score", 0))
+        vina_scores.append(vina)
         times.append(d.get("time_s", 0))
 
     if len(behaviors) < 2:
         return None
 
     bmat = np.array(behaviors)
+    if n_res == 0:
+        n_res = (bmat.shape[1] - 1) // 3
 
     # Unique profiles (2dp rounding)
     rounded = np.round(bmat, 2)
@@ -83,8 +110,7 @@ def compute_metrics(run):
     pw = pdist(bmat, "euclidean")
     mean_pw = float(np.mean(pw))
 
-    # Coverage
-    n_res = run.get("n_pocket_residues", (bmat.shape[1] - 1) // 3)
+    # Coverage (over interaction coordinates only, excluding q)
     active_any = set()
     for b in behaviors:
         for i in range(n_res):
@@ -96,7 +122,9 @@ def compute_metrics(run):
     # Best Vina
     best_vina = min(vina_scores) if vina_scores else 0
 
-    # Zero rate
+    # Zero rate: interaction-only ψ is all zeros. The last coordinate is q for
+    # φ vectors and drops correctly; for ψ-only inputs it has already been
+    # augmented above, so b[:-1] is always ψ here.
     zero_count = sum(1 for b in behaviors if sum(b[:-1]) == 0)
     zero_rate = zero_count / len(behaviors)
 
@@ -362,11 +390,14 @@ for method in ["curiosity", "mapelites", "novelty", "ga", "bo"]:
 
 # ==================== 5. BONFERRONI CORRECTED P-VALUES ====================
 print("\n" + "=" * 80)
-print("5. BONFERRONI-CORRECTED P-VALUES (7 comparisons per metric)")
+# The comparison family for method-vs-Random is every non-Random method:
+#   IMGEP-naive, IMGEP-adaptive, Curiosity-IMGEP, UCB/Aff-Div, Genetic Alg.,
+#   MAP-Elites, Novelty Search, NSGA-II  →  8 comparisons.
+n_comparisons = sum(1 for m in METHODS if m != "random")
+print(f"5. BONFERRONI-CORRECTED P-VALUES ({n_comparisons} comparisons per metric)")
 print("=" * 80)
 
 metric = "unique_profiles"
-n_comparisons = 7  # 7 methods vs random
 print(f"Metric: {metric}, Bonferroni correction for {n_comparisons} comparisons")
 print(f"{'Method':<20} {'p (raw)':>12} {'p (Bonf)':>12} {'Sig?':>6}")
 print("-" * 55)
