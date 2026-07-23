@@ -1,0 +1,39 @@
+# Reproducibility environment for the JCIM ci-2026-01658 benchmark.
+# Verified on g107 (Ubuntu 22.04, CUDA 12.4 driver, Python 3.10.12).
+# Install with: pip install -r requirements.txt
+
+# --- Cheminformatics ---
+rdkit==2024.9.6
+crem==0.2.16
+plip==2.2.2
+
+# --- Structural biology ---
+biopython==1.86
+
+# --- Scientific stack ---
+numpy==1.26.4
+scipy==1.15.3
+scikit-learn==1.7.2
+pandas==1.5.3
+
+# --- Plotting / analysis ---
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# --- Utilities ---
+joblib==1.5.2
+networkx==3.4.2
+
+# --- External binaries (NOT installable via pip) ---
+# GNINA v1.3.3 — pull docker image:
+#   docker pull gnina/gnina:latest
+#   # verified commit: 6fe1ce2, built 2026-06-30
+#
+# The wrapper script code/gnina.sh expects docker + nvidia-container-toolkit;
+# on CPU-only hosts, replace `--gpus all` with `--cpus N` inside the wrapper.
+
+# --- Data assets (NOT installable via pip) ---
+# CReM fragment database: crem_large.db
+#   SHA-256: 40262010822204fdb7576ba84208512e6203992cfb1fcbe157648fde6e6ad664
+#   Download: https://qsar4u.com/pages/crem.php  (fragments_replacements_l3.db)
+#   Place at: crem/crem_large.db
